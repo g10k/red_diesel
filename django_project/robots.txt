@@ -1,0 +1,7 @@
+User-agent:*
+Disallow: /admin/
+Sitemap: http://red-diesel.ru/sitemap.xml
+
+User-agent: Yandex
+Disallow: /admin/
+Host: red-diesel.ru

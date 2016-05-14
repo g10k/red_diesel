@@ -1,0 +1,449 @@
+{% load staticfiles %}
+<!doctype html>
+
+
+<html lang="ru" class="no-js">
+<head>
+	<title>{% block title %}RED Diesel — запчасти и двигатели Cummins.{% endblock title %}</title>
+
+
+    <meta name="description" content="{% block description %}Запчасти и двигатели Cummins для грузовой и спецтехники оптом и в розницу. В наличии и на заказ более 3000 позиций. Доставка во все регионы РФ.{% endblock description %}" />
+    <meta name="keywords" content="{% block keywords %} {% endblock %}"/>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name='yandex-verification' content='75deaed9072dcda3' />
+	<meta name="google-site-verification" content="ImKVdg7qsEvOfRyeJwZiVoRPBL496OWsu-vs3iCgY6k" />
+	<meta name='wmail-verification' content='6b48493eee55f11c7e55174df3478caf' />
+
+	<link rel="apple-touch-icon" sizes="57x57" href="/static/images/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/static/images/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/images/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/images/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/images/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/static/images/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/static/images/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/images/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/static/images/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/static/images/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/static/images/favicon/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/static/images/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+</head>
+<body>
+
+	<!-- Container -->
+	<div id="container">
+
+		<!-- Header
+		    ================================================== -->
+		<header class="clearfix">
+			<div class="logo" style="text-align:center">
+				<a href="http://red-diesel.ru/"><img src="/static/images/red-diesel-logo.jpg" width="80px" height="144px" alt="Компания RED Diesel" /></a>
+			</div>
+
+			<a class="elemadded responsive-link" href="#">Меню</a>
+
+			<nav class="nav-menu">
+				<ul class="menu-list">
+                    {% block menu %}
+                        {% include 'rd/includes/menu.html' %}
+                    {% endblock %}
+				</ul>
+			</nav>
+			<div class="guide-box">
+				<ul>
+					<li><a class="open-popup-link" href="#parts-request"><i class="fa fa-file-text-o"></i>Отправить заявку</a></li>
+				</ul>
+			</div>
+			
+		</header>
+		<!-- End Header -->
+
+		<!-- content 
+			================================================== -->
+		<div id="content">
+			<div class="inner-content">
+				<div class="top-line">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<ul class="info-list">
+									<li>
+										<p><i class="fa fa-phone"></i><a onclick="yaCounter35449350.reachGoal('PhoneTopClick'); return true;" id="phone-top" href="tel:84993942904">8&nbsp;(499)&nbsp;394-29-04</a></p>
+									</li>
+									<li>
+										<p><i class="fa fa-phone-square"></i><a href="#callback" class="open-popup-link">Заказать звонок</a></p>
+									</li>
+									<li>
+										<p><i class="fa fa-envelope"></i><a id="email-top" onclick="yaCounter35449350.reachGoal('EmailTopClick'); return true;" href="mailto:info@red-diesel.ru">info@red-diesel.ru</a></p>
+									</li>
+								</ul>
+							</div>	
+						</div>
+					</div>
+				</div>
+
+				
+
+				<!-- home-section 
+					================================================== -->
+                {% block home_section %}
+				<!-- home-section 
+					================================================== -->
+				<section id="home-section" class="slider1">
+					
+					<!--
+					#################################
+						- THEMEPUNCH BANNER -
+					#################################
+					-->
+					<div class="tp-banner-container">
+						<div class="tp-banner" >
+							<ul>
+							<!-- THE BOXSLIDE EFFECT EXAMPLES  WITH LINK ON THE MAIN SLIDE EXAMPLE -->
+							 <li data-transition="boxslide" data-slotamount="7" data-link="http://red-diesel.ru/dvigateli-cummins/">
+							   <img src="static/upload/slide/slider1.jpg" data-bgfit="contain">
+							   
+							 </li>
+							</ul>
+						
+						</div>
+					</div>
+				</section>
+				<!-- End home section -->
+                {% endblock %}
+				<!-- End home section -->
+
+				<!-- banner-section 
+					================================================== -->
+                {% block banner_section %}
+				<section class="banner-section">
+					<div class="container">
+						<p class="slogan">Нужны оригинальные запчасти Cummins по доступным ценам?</p>
+						<!-- <a href="#parts-request" class="button-one open-popup-link">Напишите нам</a> -->
+						<a href="http://red-diesel.ru/price-cummins/" class="button-one">Прайс-лист</a>	
+					</div>
+				</section>
+                {% endblock %}
+				<!-- End banner section -->
+
+                {% block services_section %}
+				<!-- services-offer 
+					================================================== -->
+				<section class="services-offer-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="offer-post">
+									<a href="http://red-diesel.ru/zapchasti-cummins"><img src="/static/images/parts.jpg" alt=""></a>
+									<h2><a href="http://red-diesel.ru/zapchasti-cummins">Запчасти для всех двигателей Cummins</a></h2>
+									<p style="margin-bottom:15px;">Предлагаем полный ассортимент запчастей для всех серий и моделей двигателей Cummins. В наличии и на заказ как оригинальные детали, так и их аналоги. </p>
+									<a class="more" href="http://red-diesel.ru/zapchasti-cummins">Подробнее</a>&nbsp;<i class="fa fa-angle-right"></i>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="offer-post">
+									<a href="http://red-diesel.ru/dvigateli-cummins"><img src="/static/images/dvs-cummins.jpg" alt=""></a>
+									<h2><a href="http://red-diesel.ru/dvigateli-cummins">Двигатели Cummins</a></h2>
+									<p style="margin-bottom:15px;">Поставляем новые двигатели Cummins серий ISBe и ISF для автомобилей КамАЗ, ГАЗ, ПАЗ и др. напрямую с заводов-изготовителей, а также восстановленные (контрактные) моторы.</p>
+									<a class="more" href="http://red-diesel.ru/dvigateli-cummins">Подробнее</a>&nbsp;<i class="fa fa-angle-right"></i>
+								</div>
+							</div>		
+						</div>
+					</div>
+				</section>
+                {% endblock %}
+				<!-- End services-offer section -->
+
+				<!-- tabs-section 
+					================================================== -->
+                {% block tabs_section %}
+				<section class="tabs-section" style="background: #f7f7f7">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-sm-12">
+								<div class="about-us-box">
+									<p class="h1">6 причин обратиться к нам</p>
+									<p>Каждый Клиент для нас особенный, и это — не пустые слова: почти половина обратившихся становятся нашими постоянными покупателями. Мы сделаем всё возможное, чтобы сотрудничество с нами было плодотворным и взаимовыгодным — а именно:</p>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="about-us-post">
+												<a href="#"><i class="fa fa-cogs"></i></a>
+												<p class="advantages">Подберём запчасти</p>
+												<span>по номеру или модели двигателя</span>
+											</div>
+											<div class="about-us-post">
+												<a href="#"><i class="fa fa-usd"></i></a>
+												<p class="advantages">Примем любые формы оплаты</p>
+												<span>наличный, безналичный рассчет, электронные платежи.</span>
+											</div>
+											<div class="about-us-post">
+												<a href="#"><i class="fa fa-train"></i></a>
+												<p class="advantages">Отправим в любую точку России</p>
+												<span>любой транспортной компанией по желанию Клиента</span>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="about-us-post">
+												<a href="#"><i class="fa fa-truck"></i></a>
+												<p class="advantages">Доставим в кратчайшие сроки</p>
+												<span>с помощью собственной службы доставки</span>
+											</div>
+											<div class="about-us-post">
+												<a href="#"><i class="fa fa-file-text-o"></i></a>
+												<p class="advantages">Дадим гарантию</p>
+												<span>от 4-х месяцев</span>
+											</div>
+											<div class="about-us-post">
+												<a href="#"><i class="fa fa-percent"></i></a>
+												<p class="advantages">Сделаем скидку</p>
+												<span>для оптовиков и постоянных клиентов</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</section>
+                {% endblock %}
+				<!-- End tabs section -->
+
+				<!-- footer 
+					================================================== -->
+				<footer>
+					<div class="up-footer">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-2">
+										<div style="text-align: center" class="footer-widget">
+											<img src="/static/images/red-diesel-logo.jpg" width="75px" height="135px" alt="Логотип компании RED Diesel" />
+										</div>
+									</div>
+								<div class="col-md-6">
+									<div class="footer-widget">
+										<h6>Компания «RED Diesel»</h6>
+										<p>Ваш надёжный поставщик запчастей ведущих мировых брендов, таких как Cummins, Bosch, Holset, Fleetguard и др., для грузовиков и спецтехники отечественного и зарубежного производства. </p>
+										<p>Мы работаем со всеми регионами Российской Федерации.</p>
+									</div>
+								</div>
+								
+								<div class="col-md-4">
+									<div class="footer-widget info-widget">
+										<h6>Контакты</h6>
+										<p><span>Телефон: </span> <a href="tel:84993942904">8&nbsp;(499)&nbsp;394-29-04</a></p>
+										<p><span>Email: </span> <a href="mailto:info@red-diesel.ru">info@red-diesel.ru</a></p>
+										<p><span>Адрес: </span> Московская обл., Серпуховский р-н, д.Борисово, д.101</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p class="copyright">
+						&copy; 2016 RED Diesel (ООО "РЕД ДИЗЕЛЬ"). Все права защищены.
+					</p>
+				</footer>
+				<!-- End footer -->
+			</div>
+		</div>
+		<!-- End Content -->
+
+		<div id="callback" class="white-popup mfp-hide">
+					<form id="callback-form" action='' method="post">
+                        {% csrf_token %}
+  						<p class="h1">Заказать обратный звонок</p>
+  					<div class="row">
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<span>Контактный телефон*</span>
+  							<input id='id_phone' name='phone' type="tel">
+                            <span id="phone-error" class="error-view hidden">Заполните телефон</span>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<span>Сообщение оператору</span>
+  							<textarea name="call-message" id="id_call-message" ></textarea>
+                            <span id="call_message-error" class="error-view hidden">Заполните сообщение</span>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<input id='id_submit_button' type="submit">
+  						</div>
+  					</div>
+  					</form>
+                    <div id="ajax-waiting" class="hidden">Форма отправляется ...</div>
+                    <div id="success-send" class="hidden">Успешно отправлено!</div>
+                    <div id="error-send" class="error-view hidden">Ошибка формы!</div>
+				</div>
+
+		<div id="parts-request" class="white-popup mfp-hide">
+					<form id="parts-request-form" method="get">
+
+  						<p class="h1">Заявка на запчасти</p>
+  					<div class="row">
+  						<div class="col-md-6">
+  							<span>Модель двигателя*, серийный номер</span>
+  							<input type="text" name="engine">
+                            <span id="rp-engine-error" class="error-view hidden">Заполните серийный номер</span>
+  						</div>
+  						<div class="col-md-6">
+  							<span>Автомобиль*</span>
+  							<input type="text" name="car">
+                            <span id="rp-car-error" class="error-view hidden">Заполните автомобиль</span>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-6">
+  							<span>Ваше имя или название организации</span>
+  							<input type="text" name="name">
+  						</div>
+  						<div class="col-md-6">
+  							<span>Город</span>
+  							<input type="text" name="city">
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-6">
+  							<span>Контактный телефон</span>
+  							<input id="id_rp_phone" type="tel" name="phone">
+                            <span id="rp-phone-error" class="error-view hidden">Заполните телефон</span>
+  						</div>
+  						<div class="col-md-6">
+  							<span>Email*</span>
+  							<input type="email" name="mail">
+                            <span id="rp-mail-error" class="error-view hidden">Заполните email</span>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<span>Перечень запчастей*</span>
+  							<textarea name="parts"></textarea>
+                            <span id="rp-parts-error" class="error-view hidden">Заполните перечень запчастей</span>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<span>Комментарии к заказу</span>
+  							<textarea name="comment"></textarea>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<input id='id-rp-submit-button' type="submit">
+  						</div>
+  					</div>
+                    <div id="rp-success-send" class="hidden">Успешно отправлено!</div>
+                    <div id="rp-error-send" class="error-view hidden">Ошибка формы!</div>
+  					</form>
+				</div>
+
+	</div>
+	<!-- End Container -->
+
+    {% block head %}
+    	<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter35449350 = new Ya.Metrika({ id:35449350, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/35449350" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Scada:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/static/css/jquery.bxslider.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/static/css/magnific-popup.css" media="screen">
+        <!-- REVOLUTION BANNER CSS SETTINGS -->
+        <link rel="stylesheet" type="text/css" href="/static/css/settings.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css" media="screen">
+
+
+        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/js/inputmask.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.inputmask.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.migrate.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.imagesloaded.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.isotope.min.js"></script>
+        <script type="text/javascript" src="/static/js/retina-1.1.0.min.js"></script>
+        <script type="text/javascript" src="/static/js/plugins-scroll.js"></script>
+        <script type="text/javascript" src="/static/js/magnific_initialize.js"></script>
+        <script type="text/javascript" src="/static/js/callback_message.js"></script>
+        <script type="text/javascript" src="/static/js/parts_request.js"></script>
+
+
+        <script type="text/javascript">
+            $(function(){
+                var pathname = window.location.pathname,
+                    a_for_active,
+                    current_a;
+
+                if (pathname =='/') {
+                    a_for_active = $('#id_main_a');
+                } else {
+                    current_a = $('a[href$="' + pathname + '"]');
+                    if (current_a.parents('li').find('a')[0]){
+                        a_for_active = current_a.parents('li').find('a')[0]
+                    } else {
+                        a_for_active  = current_a
+                    }
+
+                }
+                $(a_for_active).addClass('active');
+            })
+        </script>
+
+        <script type="text/javascript">
+			$(document).ready(function() {
+			  $("#email-top").bind('copy', function(e) {
+			    yaCounter35449350.reachGoal('EmailTopCopy'); return true;
+			  });
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			  $("#phone-top").bind('copy', function(e) {
+			    yaCounter35449350.reachGoal('PhoneTopCopy'); return true;
+			  });
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			  $("#email-footer").bind('copy', function(e) {
+			    yaCounter35449350.reachGoal('EmailFooterCopy'); return true;
+			  });
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			  $("#phone-footer").bind('copy', function(e) {
+			    yaCounter35449350.reachGoal('PhoneFooterCopy'); return true;
+			  });
+			});
+		</script>
+		<!-- BEGIN JIVOSITE CODE {literal} -->
+		<script type='text/javascript'>
+		(function(){ var widget_id = '6OfMAq812N';
+		var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+		<!-- {/literal} END JIVOSITE CODE -->
+		    {% endblock head %}
+
+    {% block php_fuck %}
+    	<script type="text/javascript" src="/static/js/script.js"></script>
+    {% endblock php_fuck %}
+
+    {% block extra_head %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,379 @@
+{% extends 'rd/base.html' %}
+
+
+{% block title %}
+    {% if detail.get_cost %}
+        {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }} — купить по цене {{ detail.get_cost }} рублей.
+    {% else %}
+        {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }} — купить, цена.
+    {% endif %}
+{% endblock title %}
+
+{% block description %}Выгодно купить {{ detail.name }} {{ detail.articul }} для двигателя Cummins {{ detail.engine }} с доставкой по всей России.{% endblock description %}
+
+{% block keywords %}{{ detail.name }} Cummins {{ detail.engine }}, {{ detail.articul }}{% endblock %}
+
+{% block extra_head %}
+    <script type="text/javascript" src="/static/js/buy_engine.js"></script>
+    <script type="text/javascript" src="/static/js/question.js"></script>
+{% endblock %}
+
+
+{% block home_section %}
+{% endblock %}
+
+{% block banner_section %}
+			<div itemscope itemtype="http://schema.org/Product" class="parts-page">
+				<section class="page-banner-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<h1 itemprop="name">{{ detail.name }} {{ detail.engine }} {{ detail.proizvoditel }}</h1>
+								<h2>{{ detail.articul }}</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<ul class="page-depth">
+									<li><a href="http://red-diesel.ru/">Главная</a></li>
+									<li><a href="http://red-diesel.ru/zapchasti-cummins/">Запчасти Cummins</a></li>
+									<li><a href="http://red-diesel.ru/price-cummins/">Прайс-лист</a></li>
+									<li>{{ detail.name }} {{ detail.engine }}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+{% endblock %}
+
+{% block services_section %}
+{% endblock %}
+
+{% block tabs_section %}
+				<section class="tabs-section">
+					<div class="container">
+						<div class="row">
+								<div class="col-sm-6">
+									<div class="product-page">
+										<img class="img-border" src="/static/images/cummins-parts.jpg" width="100%" alt="">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="product-page" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+										<ul class="specs">
+											<li>Наличие: <i>{{ detail.nalichie|default:"В наличии" }}</i></li>
+											{% if detail.nalichie == "в наличии" %}
+											    <link itemprop="availability" href="http://schema.org/InStock">
+											{% else %} 
+											    <link itemprop="availability" href="http://schema.org/PreOrder">
+											{% endif %}
+											<li>Цена (с НДС):</li>
+										</ul>
+										<p class="price">
+                                            {% if detail.get_cost %}
+                                                <span itemprop="price">{{ detail.get_cost }}</span> &#8381;
+                                                <meta itemprop="priceCurrency" content="RUB">
+                                            {% else %}
+                                                <span class="check_price">Цену уточняйте</span>
+                                            {% endif %}
+                                        </p>
+										<div class="guide-box">
+											<ul>
+												<li>
+													<a class="buy-button open-popup-link" href="#buy-engine"><i class="fa fa-shopping-cart"></i>Купить</a>
+												</li>
+												<li>
+													<a class="buy-button open-popup-link" href="#engine-question">Задать вопрос</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>				
+					</div>
+				</section>
+				<!-- End tabs section -->
+
+				<!-- tabs-section 
+					================================================== -->
+				<section class="tabs-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="product-page">
+									<div class="about-us-box">
+										<h3>Описание</h3>
+									</div>
+									<ul class="specs-dotted" itemprop="description">
+										<li>
+											<span>Артикул</span>
+											<span itemprop="productID">{{ detail.articul }}</span>
+										</li>
+										<li>
+											<span>Производитель</span>
+											<span itemprop="manufacturer">{{ detail.proizvoditel }}</span>
+										</li>							
+										<li>
+											<span>Для двигателей</span>
+											<span>{{ detail.engine }}</span>
+										</li>
+										<li>
+											<span>Для автомобилей</span>
+											<span>{{ detail.automobile }}</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-4" style="text-align: center">
+								<img src="/static/upload/engines/isf-2-8.png" width="65%" alt="">
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- End tabs section -->
+
+				<!-- tabs-section 
+					================================================== -->
+				<section class="tabs-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="product-page">
+									<div class="about-us-box">
+										<h3>Почему выбирают нас?</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="about-us-box">
+									<div class="about-us-lyrics">
+										<i class="fa fa-check"></i>
+										<span>Прямые поставки с заводов в России, Китае, Европе, США.</span>
+									</div>
+									<div class="about-us-lyrics">
+										<i class="fa fa-check"></i>
+										<span>Полное информирование о статусе выполнения заказа.</span>
+									</div>
+									<div class="about-us-lyrics">
+										<i class="fa fa-check"></i>
+										<span>Собственная служба доставки по Москве и МО.</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="about-us-box">
+									<div class="about-us-lyrics">
+										<i class="fa fa-check"></i>
+										<span>Отправка в любой регион Российской Федерации.</span>
+									</div>
+									<div class="about-us-lyrics">
+										<i class="fa fa-check"></i>
+										<span>Бесплатная доставка при заказе от 50 тыс. рублей.</span>
+									</div>
+									<div class="about-us-lyrics">
+										<i class="fa fa-check"></i>
+										<span>Скидки оптовикам и постоянным клиентам.</span>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</section>
+				<!-- End tabs section -->
+
+				<!-- tabs-section 
+					================================================== -->
+{#				<section class="tabs-section">#}
+{#					<div class="container">#}
+{#						<div class="row">#}
+{#							<div class="col-sm-6">#}
+{#								<div class="product-page">#}
+{#									<div class="about-us-box">#}
+{#										<h3>Характеристики</h3>#}
+{#									</div>#}
+{#									<ul class="specs-dotted">#}
+{#										<li>#}
+{#											<span>Модификации</span>#}
+{#											<span>s3129, s4129</span>#}
+{#										</li>#}
+{#										<li>#}
+{#											<span>Применяемость</span>#}
+{#											<span>ГАЗель «Бизнес» (ГАЗ-3302, ГАЗ-2705)</span>#}
+{#										</li>#}
+{#											<ul style="padding-left: 0">#}
+{#												<li>#}
+{#													<span>&nbsp;</span>#}
+{#													<span>ГАЗель «Next»</span>#}
+{#												</li>#}
+{#												<li>#}
+{#													<span>&nbsp;</span>#}
+{#													<span>Соболь «Бизнес» (ГАЗ-2752, ГАЗ-22171)</span>#}
+{#												</li>#}
+{#												<li>#}
+{#													<span>&nbsp;</span>#}
+{#													<span>Соболь «Баргузин» (ГАЗ-2217)</span>#}
+{#												</li>#}
+{#												<li>#}
+{#													<span>&nbsp;</span>#}
+{#													<span>ПАЗ 3237-05, ПАЗ 4230-05</span>#}
+{#												</li>#}
+{#												<li>#}
+{#													<span>&nbsp;</span>#}
+{#													<span>Foton Aumark</span>#}
+{#												</li>#}
+{#											</ul>									#}
+{#										<li>#}
+{#											<span>Экологический класс</span>#}
+{#											<span>Евро 3 / Евро 4</span>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</div>#}
+{#							</div>#}
+{#							<div class="col-sm-6" style="text-align: center">#}
+{#								<img src="/static/upload/engines/isf-2-8.png" width="65%" alt="">#}
+{#							</div>#}
+{#						</div>#}
+{#					</div>#}
+{#				</section>#}
+{#				<!-- End tabs section -->#}
+{##}
+{#				<!-- tabs-section #}
+{#					================================================== -->#}
+{#				<section class="tabs-section">#}
+{#					<div class="container">#}
+{#						<div class="row">#}
+{#							<div class="col-sm-6" style="text-align: center">#}
+{#								<img src="/static/upload/engines/upakovka.png" width="70%" alt="">#}
+{#							</div>#}
+{#							<div class="col-sm-6">#}
+{#								<div class="product-page">#}
+{#									<div class="about-us-box">#}
+{#										<h3>Габариты</h3>#}
+{#									</div>#}
+{#									<ul class="specs-dotted">#}
+{#										<li>#}
+{#											<span>Вес нетто</span>#}
+{#											<span>248 кг</span>#}
+{#										</li>#}
+{#										<li>#}
+{#											<span>Вес брутто</span>#}
+{#											<span>288 кг</span>#}
+{#										</li>#}
+{#										<li>#}
+{#											<span>Размер в упаковке</span>#}
+{#										</li>#}
+{#											<ul>#}
+{#												<li>#}
+{#													<span>Высота</span>#}
+{#													<span>957 мм</span>#}
+{#												</li>#}
+{#												<li>#}
+{#													<span>Длина</span>#}
+{#													<span>820 мм</span>#}
+{#												</li>#}
+{#												<li>#}
+{#													<span>Ширина</span>#}
+{#													<span>740 мм</span>#}
+{#												</li>#}
+{#											</ul>#}
+{#										<li>#}
+{#											<span>Упаковка</span>#}
+{#											<span>деревянный короб</span>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+{#					</div>#}
+{#				</section>#}
+
+				<div id="buy-engine" class="white-popup mfp-hide">
+					<form id="buy-engine-form" method="post">
+
+                    {% csrf_token %}
+  						<p class="h1">Заявка на {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}</p>
+                        <input type="hidden" name="engine_model" value="Заявка на {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}">
+  					<div class="row">
+  						<div class="col-md-6">
+  							<span>Ваше имя или название организации</span>
+  							<input type="text" name="name">
+  						</div>
+  						<div class="col-md-6">
+  							<span>Город</span>
+  							<input type="text" name="city">
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-6">
+  							<span>Контактный телефон</span>
+  							<input type="tel" name='phone' id="id_buy_phone">
+                            <span id="buy-phone-error" class="error-view hidden">Заполните телефон</span>
+  						</div>
+  						<div class="col-md-6">
+  							<span>Email*</span>
+  							<input type="email" name="mail">
+                            <span id="buy-mail-error" class="error-view hidden">Заполните email</span>
+
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<span>Комментарии к заказу</span>
+  							<textarea name="comment"></textarea>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<input type="submit" id="id-buy-submit-button">
+  						</div>
+  					</div>
+
+                    <div id="ajax-waiting" class="hidden">Форма отправляется ...</div>
+                    <div id="success-send" class="hidden">Успешно отправлено!</div>
+                    <div id="error-send" class="error-view hidden">Ошибка формы!</div>
+  					</form>
+				</div>
+
+				<div id="engine-question" class="white-popup mfp-hide">
+					<form id="engine-question-form" method="post">
+                    {% csrf_token %}
+  						<p class="h1">Вопрос по позиции &laquo;{{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}&raquo;</p>
+                        <input type="hidden" name="engine_model" value="Вопрос по позиции &laquo;{{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}&raquo;">
+  					<div class="row">
+  					</div>
+  					<div class="row">
+  						<div class="col-md-6">
+  							<span>Контактный телефон</span>
+  							<input type="tel" name="phone" id="id_question_phone">
+                            <span id="question-phone-error" class="error-view hidden">Заполните телефон</span>
+  						</div>
+  						<div class="col-md-6">
+  							<span>Email*</span>
+  							<input type="email" name="mail">
+                            <span id="question-mail-error" class="error-view hidden">Заполните email</span>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<span>Ваш вопрос*</span>
+  							<textarea name="question"></textarea>
+                            <span id="question-comment-error" class="error-view hidden">Введите ваш вопрос</span>
+  						</div>
+  					</div>
+  					<div class="row">
+  						<div class="col-md-12">
+  							<input type="submit" id="id-question-submit-button">
+  						</div>
+  					</div>
+
+                    <div id="ajax-waiting" class="hidden">Форма отправляется ...</div>
+                    <div id="success-send" class="hidden">Успешно отправлено!</div>
+                    <div id="error-send" class="error-view hidden">Ошибка формы!</div>
+  					</form>
+				</div>
+		</div> <!-- конец .parts-page  -->
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://red-diesel.ru/</loc>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/zapchasti-cummins/</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/price-cummins/</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/dvigateli-cummins/</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/dvigateli-cummins/isf-2-8/</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/dvigateli-cummins/isf-3-8/</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/about/</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/contact/</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/static/upload/price/pricelist-cummins-red-diesel.pdf</loc>
+  <lastmod>2016-03-01T13:00:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://red-diesel.ru/static/upload/price/pricelist-cummins-red-diesel.xls</loc>
+  <lastmod>2016-03-01T13:00:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+</urlset>

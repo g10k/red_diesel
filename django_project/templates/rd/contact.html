@@ -1,0 +1,187 @@
+{% extends 'rd/base.html' %}
+{% block php_fuck %}{% endblock %}
+
+{% block title %}Контакты компании RED Diesel{% endblock title %}
+
+{% block description %}Наш телефон: 8 (499) 394-29-04. Электронная почта: info@red-diesel.ru. Наш офис: Московская обл.,
+Серпуховский р-н, д.Борисово, д.101.{% endblock description %}
+
+{% block extra_head %}
+    <script>
+        function isEmail(email) {
+          var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+          return regex.test(email);
+        }
+        function isBlank(str) {
+            return (!str || /^\s*$/.test(str));
+        }
+        function name_check(){
+            var name_input = $("#name"),
+                name = name_input.val();
+            if (!isBlank(name) && name.length >= 4){
+                 console.log('invalid name');
+                 $("#name-error").addClass('hidden');
+                return true;
+            } else {
+                $("#name-error").removeClass('hidden');
+                return false;
+            }
+        }
+        function mail_check(){
+            var email_input = $("#mail"),
+                email=email_input.val();
+            if (isEmail(email)){
+                $("#mail-error").addClass('hidden');
+                return true;
+            } else {
+                $("#mail-error").removeClass('hidden');
+                return false;
+            }
+        }
+        function comment_check(){
+            var comment_input = $("#comment"),
+                comment= comment_input.val();
+            if (!isBlank(comment)){
+                $("#comment-error").addClass('hidden');
+                return true;
+            } else {
+                $("#comment-error").removeClass('hidden');
+                return false;
+            }
+        }
+
+{#        $("#mail").focusout(function(){#}
+{#            mail_check();#}
+{#        });#}
+{#        $("#name").focusout(function(){#}
+{#            name_check();#}
+{#        });#}
+{#        $("#comment").focusout(function(){#}
+{#            comment_check();#}
+{#        });#}
+
+        $('#contact-form').submit(function(event){
+            var name=name_check() ,
+                mail=mail_check(),
+                comment =comment_check();
+
+            console.log(name, mail, comment);
+            if (name && mail && comment){
+
+            } else {
+                event.preventDefault();
+            }
+        })
+
+    </script>
+
+    <script type="text/javascript">
+            $(document).ready(function() {
+              $("#phone-contacts-city").bind('copy', function(e) {
+                yaCounter35449350.reachGoal('PhoneCityContactsCopy'); return true;
+              });
+            });
+    </script>
+    <script type="text/javascript">
+            $(document).ready(function() {
+              $("#phone-contacts-dima").bind('copy', function(e) {
+                yaCounter35449350.reachGoal('PhoneDimaContactsCopy'); return true;
+              });
+            });
+    </script>
+    <script type="text/javascript">
+            $(document).ready(function() {
+              $("#phone-contacts-roma").bind('copy', function(e) {
+                yaCounter35449350.reachGoal('PhoneRomaContactsCopy'); return true;
+              });
+            });
+    </script>
+    <script type="text/javascript">
+            $(document).ready(function() {
+              $("#mail-contacts").bind('copy', function(e) {
+                yaCounter35449350.reachGoal('MailContactsCopy'); return true;
+              });
+            });
+    </script>
+
+
+{% endblock %}
+
+{% block home_section %}
+{% endblock %}
+
+{% block banner_section %}
+   <div id="map">
+        <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=KVYfp79SOmFQB2bvS3ujH7E1dvbi6mrV&width=100%&height=100%&lang=ru_RU&sourceType=constructor"></script>
+   </div>
+{% endblock %}
+
+{% block services_section %}
+{% endblock %}
+
+{% block tabs_section %}
+    <section class="contact-section">
+        <div class="container">
+            <div class="col-sm-4">
+                <div class="contact-info" itemscope itemtype="http://schema.org/Organization">
+                    <h2>Контакты</h2>
+                    <ul class="information-list">
+                    	<meta itemprop="name" content="RED Diesel" />
+                    	<meta itemprop="url" content="http://red-diesel.ru" />
+                    	<meta itemprop="telephone" content="+7 499 394–29–04" />
+                    	<meta itemprop="email" content="info@red-diesel.ru" />
+                        <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                        <meta itemprop="addressRegion" content="Московская область, Серпуховский район" />
+                        <meta itemprop="addressLocality" content="деревня Борисово" />
+                        <meta itemprop="streetAddress" content="дом 101" />
+                        <meta itemprop="postalCode" content="142207" />
+                        <h3>Офис</h3><i class="fa fa-map-marker"></i><span>Московская обл.,</br> Серпуховский р-н, д.Борисово, д.101</span>
+                        <p><i class="fa fa-clock-o"></i><span>Пн-Пт, с 9:00 до 18:00</span></p>
+                        </li>
+                        <li>
+                        <h3>Телефоны</h3>
+                        <i class="fa fa-phone"></i><span id="phone-contacts-city">8&nbsp;(499)&nbsp;394-29-04</span>
+                        <i class="fa fa-mobile"></i><span id="phone-contacts-dima">8&nbsp;(977)&nbsp;690-91-69</span>
+                        <i class="fa fa-mobile"></i><span id="phone-contacts-roma">8&nbsp;(977)&nbsp;690-91-70</span></i>
+                        <p><i class="fa fa-clock-o"></i><span>Каждый день, с 9:00 до 21:00</span></p>
+                        </li>
+                        <li>
+                        <h3>Электронная почта</h3>
+                        <i class="fa fa-envelope-o"></i><a id="mail-contacts" onclick="yaCounter35449350.reachGoal('EmailContactsClick'); return true;" href="mailto:info@red-diesel.ru">info@red-diesel.ru</a>
+                        <p><i class="fa fa-clock-o"></i><span>Круглосуточно</span></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                {% if 'thanks' not in request.GET %}
+                    <form id="contact-form" method="post" action="" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+                        <h2>Напишите нам</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% if form.name.errors %}{{ form.name.errors|join:", " }}{% endif %}
+                                <input name="name" id="name" type="text" placeholder="Имя" value="{{ form.name.value|default_if_none:"" }}">
+                                <span id="name-error" class="error-view hidden">Поле не заполнено (минимум 4 символа)</span>
+                            </div>
+                            <div class="col-md-6">
+                                {% if form.mail.errors %}{{ form.mail.errors|join:", " }}{% endif %}
+                                <input name="mail" id="mail" type="text" placeholder="Email" value="{{ form.mail.value|default_if_none:"" }}">
+                                <span id="mail-error" class="error-view hidden">Неверный email</span>
+                            </div>
+                        </div>
+                        {% if form.comment.errors %}{{ form.comment.errors|join:", " }}{% endif %}
+                        <textarea name="comment" id="comment" placeholder="Текст сообщения">{{ form.comment.value|default_if_none:"" }}</textarea>
+                        <span id="comment-error" class="error-view hidden">Поле должно быть заполнено</span>
+                        <input type="submit" id="submit_contact" value="Отправить">
+                        <div id="msg" class="message"></div>
+                    </form>
+                {% else %}
+                    Спасибо за ваше сообщение! Мы обязательно с вами свяжемся
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

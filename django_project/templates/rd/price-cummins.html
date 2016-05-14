@@ -1,0 +1,162 @@
+{% extends 'rd/base.html' %}
+
+{% block title %}Прайс-лист Cummins: купить, цена{% endblock title %}
+
+{% block description %}Актуальные цены на запчасти и двигатели Cummins. В наличии и на заказ более 3000 позиций. Скидки для оптовиков. Доставка во все регионы РФ.{% endblock description %}
+
+{% block home_section %}
+    <section class="page-banner-section parts">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h1>Прайс на запчасти для двигателей Cummins</h1>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="page-depth">
+                        <li><a href="http://red-diesel.ru/">Главная</a></li>
+                        <li><a href="http://red-diesel.ru/zapchasti-cummins/">Запчасти Cummins</a></li>
+                        <li>Прайс-лист</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block banner_section %}
+{% endblock %}
+
+{% block services_section %}
+{% endblock %}
+
+{% block tabs_section %}
+    <section class="tabs-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="about-us-box">
+                        <p>В каталоге представлен базовый ассортимент запчастей для двигателей Cummins. Поставка отсутствующих в прайсе позиций рассматривается в индивидуальном порядке, на заказ.</p>
+                        <p>Для Вашего удобства в прайс-листе реализована возможность поиска по наименованию или артикулу, а также сортировка всего списка запчастей по артикулу, наименованию, цене или наличию. Прайс-лист обновляется раз в неделю, поэтому актуальность цен и наличия всегда можно уточнить у наших менеджеров через контактные формы или по телефонам.</p>
+                        <!-- <p><strong>Скачать прайс-лист на свой компьютер:</strong>
+                        <a onclick="yaCounter35449350.reachGoal('PricelistExcelDownload'); return true;" href="/static/upload/price/pricelist-cummins-red-diesel.xls"><i class="fa fa-file-excel-o fa-lg"></i>&nbsp;в&nbsp;формате&nbsp;Excel</a>, 
+                        <a onclick="yaCounter35449350.reachGoal('PricelistPDFDownload'); return true;" href="/static/upload/price/pricelist-cummins-red-diesel.pdf"><i class="fa fa-file-pdf-o fa-lg"></i>&nbsp;в&nbsp;формате&nbsp;PDF</a></p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- tabs-section 
+                    ================================================== -->
+    <section class="tabs-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">                        
+                    <table id="price" class="row-border hover">
+                        <thead>
+                        <tr>
+                            <th>Артикул</th>
+                            <th>Наименование</th>
+                            <th>Применяемость</th>
+                            <th>Цена, руб.</th>
+                            <th>Наличие&nbsp;в Москве</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- End tabs section -->
+
+{% endblock  %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="/static/DataTables/datatables.min.css"/>
+<style type="text/css">
+    table.dataTable tbody tr {
+    background-color: #f7f7f7; 
+    }
+    table.dataTable thead td {
+    padding: 10px 18px;
+    border-bottom: 3px solid #dddddd; 
+    }
+    div.dataTables_filter input {
+      width: 350px;
+      padding: 10px 15px;
+      border: 1px solid #eaeaea;
+      background: white;
+      outline: none;
+      transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      color: #666666;
+      font-size: 12px;
+      font-family: 'Scada', sans-serif;
+      font-weight: 400 !important;
+    }
+    div.dataTables_filter input:focus {
+      border: 1px solid #e40606;
+    }
+    div.dataTables_length select {
+      height: 40px;
+      border: 1px solid #eaeaea;
+      background: white;
+      color: #666666;
+      font-size: 14px;
+      font-family: 'Scada', sans-serif;
+      font-weight: 700 !important;
+    }
+     div.dataTables_length select :focus {
+      border: 1px solid #e40606;
+    }
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+        text-align: left;
+    }
+    .dataTables_wrapper .dataTables_length {
+        float: right;
+    }
+    table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+    	background-color: #e40606;
+    }
+</style>
+<script type="text/javascript" src="/static/DataTables/datatables.min.js"></script>
+<script type="text/javascript">
+        $(document).ready( function () {
+            $('#price').DataTable( {
+                "lengthMenu": [ [50, 250, 500, -1], [50, 250, 500, "Все"] ],
+{#                "bAutoWidth": true,#}
+{#                "autoWidth": true,#}
+{#                responsive: true,#}
+                ajax: '/json/detail/',
+                language: {
+                  "processing": "Подождите...",
+                  "search": "Поиск:",
+                  "searchPlaceholder": "Введите название или артикул детали",
+                  "lengthMenu": "Показать _MENU_ позиций",
+                  "info": "Позиции с _START_ по _END_ из _TOTAL_",
+                  "infoEmpty": "Позиции с 0 по 0 из 0",
+                  "infoFiltered": "(отфильтровано из _MAX_ позиций)",
+                  "infoPostFix": "",
+                  "loadingRecords": "Загрузка позиций...",
+                  "zeroRecords": "Позиции отсутствуют.",
+                  "emptyTable": "В таблице отсутствуют данные",
+                  "paginate": {
+                    "first": "Первая",
+                    "previous": "Предыдущая",
+                    "next": "Следующая",
+                    "last": "Последняя"
+                  },
+                  "aria": {
+                    "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                    "sortDescending": ": активировать для сортировки столбца по убыванию"
+                        }
+                    }
+                } );
+            } );
+</script>
+{% endblock  %}
