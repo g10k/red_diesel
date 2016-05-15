@@ -1,0 +1,35 @@
+{% extends 'rd/price-cummins.html' %}
+
+{% block home_section %}
+    <section class="page-banner-section parts">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h1>Двигатели</h1>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="page-depth">
+                        <li><a href="http://red-diesel.ru/">Главная</a></li>
+                        <li><a href="http://red-diesel.ru/cars/">Автомобили</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block tabs_section %}
+    {% for engine in  engines %}
+        <p></p>
+        <legend><a href="{{ engine.name }}">{{ engine }}</a></legend>
+        <p>name: {{ engine.name }}</p>
+        <p> title:{{ engine.title }}</p>
+        <p>description: {{ engine.description }}</p>
+        <p>keywords: {{ engine.keywords }}</p>
+        <p>header: {{ engine.header }}</p>
+        {% for photo in engine.photos.all %}
+            {{ photo }}
+        {% endfor %}
+    {% endfor %}
+
+{% endblock  %}

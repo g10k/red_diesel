@@ -1,5 +1,5 @@
 from django.contrib import admin
-from rd.models import Detal, Photo, EngineCategoryDetail, CarCategoryDetail
+from rd.models import Detal, Photo, EngineCategoryDetail, CarCategoryDetail, EngineCategoryDetailPhoto, CarCategoryDetailPhoto
 # Register your models here.
 
 
@@ -16,9 +16,23 @@ class DetalAdmin(admin.ModelAdmin):
     list_filter = ('car_categories', 'engine_categories')
     filter_horizontal = ('related_details',)
 
+class EnginePhotoInline(admin.TabularInline):
+    model = EngineCategoryDetailPhoto
+
+class CategoryPhotoInline(admin.TabularInline):
+    model = EngineCategoryDetailPhoto
 
 
+class EngineCategoryDetailAdmin(admin.ModelAdmin):
+    inlines = [
+        EnginePhotoInline
+    ]
+
+class CarCategoryDetailAdmin(admin.ModelAdmin):
+    inlines = [
+        CategoryPhotoInline
+    ]
 
 admin.site.register(Detal, DetalAdmin)
-admin.site.register(EngineCategoryDetail, admin.ModelAdmin)
-admin.site.register(CarCategoryDetail, admin.ModelAdmin)
+admin.site.register(EngineCategoryDetail, EngineCategoryDetailAdmin)
+admin.site.register(CarCategoryDetail, CarCategoryDetailAdmin)

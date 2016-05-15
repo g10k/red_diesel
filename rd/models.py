@@ -64,7 +64,6 @@ class Photo(models.Model):
     class Meta:
         ordering = ['sort',]
 
-
 class EngineCategoryDetail(models.Model):
     name = models.CharField(u'Категория', max_length=255, blank=True)
     title = models.CharField(u'title', max_length=255, blank=True)
@@ -118,3 +117,15 @@ def get_detail_by_url(url):
     if Detal.objects.filter(articul=artikul):
        return Detal.objects.filter(articul=artikul).first()
     return Detal.objects.filter(articul__icontains=artikul).first()
+
+
+def get_car_by_url(url):
+    if CarCategoryDetail.objects.filter(name=url):
+        return CarCategoryDetail.objects.filter(name=url).first()
+
+
+def get_engine_by_url(url):
+    if EngineCategoryDetail.objects.filter(name=url):
+        return EngineCategoryDetail.objects.filter(name=url).first()
+
+

@@ -1,0 +1,14 @@
+{% extends 'rd/base.html' %}
+
+{% block content%}
+    <p>name:{{ engine.name }}</p>
+    <p>title:{{ engine.title }}</p>
+    <p>description:{{ engine.description }}</p>
+    <p>keywords:{{ engine.keywords }}</p>
+    <p>header:{{ engine.header }}</p>
+    {% for engine_photo in engine.photos.all %}
+        {{ engine_photo }}
+    {% empty %}
+        Фото не привязано
+    {% endfor %}
+{% endblock  %}

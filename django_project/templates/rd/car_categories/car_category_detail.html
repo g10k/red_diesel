@@ -1,0 +1,15 @@
+{% extends 'rd/base.html' %}
+
+{% block content%}
+    {{ car_category }}
+    <p>{{ car_category.name }}</p>
+    <p>{{ car_category.title }}</p>
+    <p>{{ car_category.description }}</p>
+    <p>{{ car_category.keywords }}</p>
+    <p>{{ car_category.header }}</p>
+    {% for car_photo in car_category.photos.all %}
+        {{ car_photo }}
+    {% empty %}
+        Фото не привязано
+    {% endfor %}
+{% endblock  %}

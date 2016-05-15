@@ -8,7 +8,8 @@ from django.views.generic.edit import BaseFormView
 from django.core.mail import send_mail, mail_admins
 
 import django_project.forms
-from rd.models import get_detail_by_url
+from rd.models import get_detail_by_url, get_car_by_url, get_engine_by_url
+
 class JsonResponse(HttpResponse):
     """
     An HTTP response class that consumes data to be serialized to JSON.
@@ -156,10 +157,41 @@ class DetailPageView(TemplateView):
 detail_page = DetailPageView.as_view()
 
 
+
+
+
 class CarsView(TemplateView):
-    template_name = 'rd/car_categories.html'
+    template_name = 'rd/car_categories/car_categories.html'
     def get_context_data(self, **kwargs):
 
         return {'car_categories': rd.models.CarCategoryDetail.objects.all()}
-
 cars = CarsView.as_view()
+
+class CarDetailView(TemplateView):
+    template_name = 'rd/car_categories/car_category_detail.html'
+    def get_context_data(self, **kwargs):
+        car_detail_url = self.args[0]
+        car_category =  get_car_by_url(car_detail_url)
+        if not car_category:
+            raise Http404(u'Нет категории автомобиля %s' % car_detail_url)
+        return {'car_category': car_category}
+car_detail = CarDetailView.as_view()
+
+
+
+class EnginesView(TemplateView):
+    template_name = 'rd/engines/engines_list.html'
+    def get_context_data(self, **kwargs):
+        return {'engines': rd.models.EngineCategoryDetail.objects.all()}
+engines = EnginesView.as_view()
+
+
+class EngineDetailView(TemplateView):
+    template_name = 'rd/engines/engine_detail.html'
+    def get_context_data(self, **kwargs):
+        engine_detail_url = self.args[0]
+        engine = get_engine_by_url(engine_detail_url)
+        if not engine:
+            raise Http404(u'Нет двигателя %s' % engine_detail_url)
+        return {'engine': engine}
+engine_detail = EngineDetailView.as_view()
