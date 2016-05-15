@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!doctype html>
+
+<html lang="ru" class="no-js">
+    <head>
+        <title>{% block title %}RED Diesel — запчасти и двигатели Cummins.{% endblock title %}</title>
+    </head>
+    <body>
+
+    {% block content %}
+        В базе находится {{ details|length }} деталей
+        <hr>
+        Из excel загружено {{ all_excel_data|length }}
+        Отличающиеся объекты: {{ difference_objects|length }}
+        <table>
+            <tr>
+                <th>Объект</th>
+                <th>Внутренний артикул</th>
+                <th>Артикул</th>
+                <th>Название</th>
+                <th>Производитель</th>
+                <th>Двигатель</th>
+                <th>Авто</th>
+                <th>Цена</th>
+                <th>Наличие на складе</th>
+            </tr>
+        {% for detail_with_diff in difference_objects %}
+            <tr>
+                <th>В базе</th>
+                <th>{{ detail_with_diff.inner_articul }}</th>
+                <th>{{ detail_with_diff.articul }}</th>
+                <th>{{ detail_with_diff.name }}</th>
+                <th>{{ detail_with_diff.proizvoditel }}</th>
+                <th>{{ detail_with_diff.engine }}</th>
+                <th>{{ detail_with_diff.automobile }}</th>
+                <th>{{ detail_with_diff.cost }}</th>
+                <th>{{ detail_with_diff.nalichie }}</th>
+            </tr>
+            <tr>
+                <th>В excel</th>
+                {% for value in detail_with_diff.difference_row %}
+                    <th {% if value %}bgcolor="green"{% endif %}>{{ value }}</th>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+        Новые объекты:
+        {{  new_objects|length}}
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+              {{ form.excel_file }}
+            <button>Отправить</button>
+            <input type="checkbox" name="load"/>
+        </form>
+    {% endblock %}
+    </body>
+</html>
