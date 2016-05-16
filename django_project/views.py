@@ -137,8 +137,13 @@ import rd.models
 
 class DetailAjaxView(BaseFormView):
     def get(self, request, *args, **kwargs):
-        search = request.GET.get('search')
         details = rd.models.Detal.objects.all()
+        engine = request.GET.get('engine')
+        if engine:
+            details = details.filter(engine_categories__name=engine)
+        car = request.GET.get('car')
+        if car:
+            details = details.filter(car_categories__name=engine)
         res = [[d.articul, "<a href='http://%s'>%s</a>" % (d.get_full_url(), u' '.join([d.name, d.engine, d.proizvoditel])), d.automobile, d.get_cost() or u"Цену уточняйте", d.nalichie] for d in details]
         return JsonResponse({'data': res})
 detail = DetailAjaxView.as_view()

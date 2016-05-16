@@ -1,14 +1,203 @@
 {% extends 'rd/base.html' %}
 
+{% block title %}
+    {% if engine.header %}
+        {{ engine.header }}
+    {% else %}
+        Запчасти для двигателя {{ engine.title }}: купить, цена, прайс-лист.
+    {% endif %}
+{% endblock title %}
+
+{% block description %}
+    {% if engine.description %}
+        {{ engine.description }}
+    {% else %}
+        Полный ассортимент запчастей для двигателя {{ engine.title }} в наличии. Лучшие цены, оперативная доставка, гарантия.
+    {% endif %}
+{% endblock description %}
+
+{% block keywords %}
+    {% if engine.keywords %}
+        {{ engine.keywords }}
+    {% else %}
+        Запчасти на {{ engine.title }}
+    {% endif %}
+{% endblock %}
+
 {% block content%}
-    <p>name:{{ engine.name }}</p>
+    <div class="parts-page">
+        <section class="page-banner-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1>Запчасти для двигателя {{ engine.title }}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="page-depth">
+                            <li><a href="http://red-diesel.ru/">Главная</a></li>
+                            <li><a href="http://red-diesel.ru/zapchasti-cummins/">Запчасти Cummins</a></li>
+                            <li>Запчасти для двигателя {{ engine.title }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tabs-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="about-us-box">
+                        <p>В каталоге представлен базовый ассортимент запчастей для двигателей Cummins. Поставка отсутствующих в прайсе позиций рассматривается в индивидуальном порядке, на заказ.</p>
+                        <p>Для Вашего удобства в прайс-листе реализована возможность поиска по наименованию или артикулу, а также сортировка всего списка запчастей по артикулу, наименованию, цене или наличию. Прайс-лист обновляется раз в неделю, поэтому актуальность цен и наличия всегда можно уточнить у наших менеджеров через контактные формы или по телефонам.</p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    {% for engine_photo in engine.photos.all %}
+                        <img src="{{ engine_photo.image.url }}" width="100%">
+                    {% empty %}
+                        Фото не привязано
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tabs-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">                        
+                    <table id="price" class="row-border hover">
+                        <thead>
+                        <tr>
+                            <th>Артикул</th>
+                            <th>Наименование</th>
+                            <th>Применяемость</th>
+                            <th>Цена, руб.</th>
+                            <th>Наличие&nbsp;в Москве</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+<!--     <p>name:{{ engine.name }}</p>
     <p>title:{{ engine.title }}</p>
     <p>description:{{ engine.description }}</p>
     <p>keywords:{{ engine.keywords }}</p>
     <p>header:{{ engine.header }}</p>
     {% for engine_photo in engine.photos.all %}
-        {{ engine_photo }}
+        <img src="{{ engine_photo.image.url }}">
     {% empty %}
         Фото не привязано
     {% endfor %}
+{% endblock  %} -->
+
+<!--     {% for detal in engine.detal_set.all %}
+        {{ detal }}
+        <p>Внутренний Артикул: {{ detal.inner_articul }}</p>
+        <p>Артикул {{ detal.articul }}</p>
+        <p>Название {{ detal.name }}</p>
+        <p>Наличие {{ detal.nalichie }}</p>
+        <p>Производитель {{ detal.proizvoditel }}</p>
+        <p>Машина {{ detal.automobile }}</p>
+        <p>Описание{{ detal.description }}</p>
+        <p>title {{ detal.title }}</p>
+        <p>header{{ detal.header }}</p>
+    {% endfor %} -->
+
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="/static/DataTables/datatables.min.css"/>
+<style type="text/css">
+    table.dataTable tbody tr {
+    background-color: #f7f7f7;
+    }
+    table.dataTable thead td {
+    padding: 10px 18px;
+    border-bottom: 3px solid #dddddd;
+    }
+    div.dataTables_filter input {
+      width: 350px;
+      padding: 10px 15px;
+      border: 1px solid #eaeaea;
+      background: white;
+      outline: none;
+      transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      color: #666666;
+      font-size: 12px;
+      font-family: 'Scada', sans-serif;
+      font-weight: 400 !important;
+    }
+    div.dataTables_filter input:focus {
+      border: 1px solid #e40606;
+    }
+    div.dataTables_length select {
+      height: 40px;
+      border: 1px solid #eaeaea;
+      background: white;
+      color: #666666;
+      font-size: 14px;
+      font-family: 'Scada', sans-serif;
+      font-weight: 700 !important;
+    }
+     div.dataTables_length select :focus {
+      border: 1px solid #e40606;
+    }
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+        text-align: left;
+    }
+    .dataTables_wrapper .dataTables_length {
+        float: right;
+    }
+    table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+    	background-color: #e40606;
+    }
+</style>
+<script type="text/javascript" src="/static/DataTables/datatables.min.js"></script>
+<script type="text/javascript">
+        $(document).ready( function () {
+            $('#price').DataTable( {
+                "lengthMenu": [ [50, 250, 500, -1], [50, 250, 500, "Все"] ],
+{#                "bAutoWidth": true,#}
+{#                "autoWidth": true,#}
+{#                responsive: true,#}
+                ajax: '/json/detail/?engine={{ engine.name }}',
+                language: {
+                  "processing": "Подождите...",
+                  "search": "Поиск:",
+                  "searchPlaceholder": "Введите название или артикул детали",
+                  "lengthMenu": "Показать _MENU_ позиций",
+                  "info": "Позиции с _START_ по _END_ из _TOTAL_",
+                  "infoEmpty": "Позиции с 0 по 0 из 0",
+                  "infoFiltered": "(отфильтровано из _MAX_ позиций)",
+                  "infoPostFix": "",
+                  "loadingRecords": "Загрузка позиций...",
+                  "zeroRecords": "Позиции отсутствуют.",
+                  "emptyTable": "В таблице отсутствуют данные",
+                  "paginate": {
+                    "first": "Первая",
+                    "previous": "Предыдущая",
+                    "next": "Следующая",
+                    "last": "Последняя"
+                  },
+                  "aria": {
+                    "sortAscending": ": активировать для сортировки столбца по возрастанию",
+                    "sortDescending": ": активировать для сортировки столбца по убыванию"
+                        }
+                    }
+                } );
+            } );
+</script>
 {% endblock  %}

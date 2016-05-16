@@ -65,6 +65,7 @@ class Photo(models.Model):
         ordering = ['sort',]
 
 class EngineCategoryDetail(models.Model):
+    url = models.CharField(u'Ручной url', max_length=400, blank=True)
     name = models.CharField(u'Категория', max_length=255, blank=True)
     title = models.CharField(u'title', max_length=255, blank=True)
     description = models.CharField(u'description', max_length=255, blank=True)
@@ -81,13 +82,14 @@ class EngineCategoryDetail(models.Model):
 class EngineCategoryDetailPhoto(models.Model):
     sort = models.IntegerField(default=1)
     title = models.CharField(u'Подпись', blank=True, max_length=255)
-    image = models.ImageField(verbose_name=u'путь к картинке')
+    image = models.ImageField(verbose_name=u'путь к картинке', upload_to='dvigateli-cummins/' )
     category_detal = models.ForeignKey(EngineCategoryDetail, related_name='photos')
 
     class Meta:
         ordering = ['sort', ]
 
 class CarCategoryDetail(models.Model):
+    url = models.CharField(u'Ручной url', max_length=400, blank=True)
     name = models.CharField(u'Категория', max_length=255, blank=True)
     title = models.CharField(u'title', max_length=255, blank=True)
     description = models.CharField(u'description', max_length=255, blank=True)
@@ -104,8 +106,9 @@ class CarCategoryDetail(models.Model):
 class CarCategoryDetailPhoto(models.Model):
     sort = models.IntegerField(default=1)
     title = models.CharField(u'Подпись', blank=True, max_length=255)
-    image = models.ImageField(verbose_name=u'путь к картинке')
+    image = models.ImageField(verbose_name=u'путь к картинке', upload_to='car-categories/')
     category_detal = models.ForeignKey(CarCategoryDetail, related_name='photos')
+
     class Meta:
         ordering = ['sort',]
 
@@ -120,12 +123,15 @@ def get_detail_by_url(url):
 
 
 def get_car_by_url(url):
-    if CarCategoryDetail.objects.filter(name=url):
-        return CarCategoryDetail.objects.filter(name=url).first()
-
+    if CarCategoryDetail.objects.filter(url='').filter(name=url):
+        return CarCategoryDetail.objects.filter(url='').filter(name=url).first()
+    elif CarCategoryDetail.objects.filter(url=url):
+        return CarCategoryDetail.objects.filter(url=url).first()
 
 def get_engine_by_url(url):
-    if EngineCategoryDetail.objects.filter(name=url):
-        return EngineCategoryDetail.objects.filter(name=url).first()
+    if EngineCategoryDetail.objects.filter(url='').filter(name=url):
+        return EngineCategoryDetail.objects.filter(url='').filter(name=url).first()
+    elif EngineCategoryDetail.objects.filter(url=url):
+        return EngineCategoryDetail.objects.filter(url=url).first()
 
 

@@ -21,7 +21,7 @@
 {% block tabs_section %}
     {% for car_category in  car_categories %}
         <p></p>
-        <legend>{{ car_category }}</legend>
+        <legend><a href="{{ car_category.url|default:car_category.name }}">{{ car_category }}</a></legend>
         name:{{ car_category.name }}
         title:{{ car_category.title }}
         description: {{ car_category.description }}

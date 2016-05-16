@@ -85,7 +85,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'django_project/static/'),)
-# STATIC_ROOT = os.path.join(BASE_DIR, 'django_project/static_root/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'django_project/static_root/')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'django_project/static/uploads/')
+MEDIA_URL = '/static/uploads/'
 
 
 EMAIL_USE_TLS = True

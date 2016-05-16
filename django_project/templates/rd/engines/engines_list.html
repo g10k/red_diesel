@@ -21,7 +21,7 @@
 {% block tabs_section %}
     {% for engine in  engines %}
         <p></p>
-        <legend><a href="{{ engine.name }}">{{ engine }}</a></legend>
+        <legend><a href="{{ engine.url|default:engine.name }}">{{ engine }}</a></legend>
         <p>name: {{ engine.name }}</p>
         <p> title:{{ engine.title }}</p>
         <p>description: {{ engine.description }}</p>

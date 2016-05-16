@@ -20,7 +20,7 @@ class EnginePhotoInline(admin.TabularInline):
     model = EngineCategoryDetailPhoto
 
 class CategoryPhotoInline(admin.TabularInline):
-    model = EngineCategoryDetailPhoto
+    model = CarCategoryDetailPhoto
 
 
 class EngineCategoryDetailAdmin(admin.ModelAdmin):
