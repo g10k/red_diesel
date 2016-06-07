@@ -1,14 +1,17 @@
 # -*- encoding: utf-8 -*-
 import json
 from django.core.serializers.json import DjangoJSONEncoder
-from django.http.response import HttpResponse, Http404
+from django.core.urlresolvers import reverse
+from django.http.response import HttpResponse, Http404, HttpResponsePermanentRedirect, HttpResponseRedirect
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import BaseFormView
 from django.core.mail import send_mail, mail_admins
 
+import django_project.views
 import django_project.forms
-from rd.models import get_detail_by_url, get_car_by_url, get_engine_by_url
+from rd.models import get_detail_by_url, get_car_by_url, get_engine_by_url,get_detail_by_old_url
 
 class JsonResponse(HttpResponse):
     """
@@ -143,26 +146,31 @@ class DetailAjaxView(BaseFormView):
             details = details.filter(engine_categories__name=engine)
         car = request.GET.get('car')
         if car:
-            details = details.filter(car_categories__name=engine)
+            details = details.filter(car_categories__name=car)
         res = [[d.articul, "<a href='http://%s'>%s</a>" % (d.get_full_url(), u' '.join([d.name, d.engine, d.proizvoditel])), d.automobile, d.get_cost() or u"Цену уточняйте", d.nalichie] for d in details]
         return JsonResponse({'data': res})
 detail = DetailAjaxView.as_view()
 
-
 class DetailPageView(TemplateView):
     template_name = 'rd/detail_page.html'
-    def get_context_data(self, **kwargs):
-        print kwargs, self.request, self.args, self.kwargs
-        # print self.args, self.kwargs
+
+    def dispatch(self, request, *args, **kwargs):
         url = self.args[0]
         detail = get_detail_by_url(url)
-        if not detail:
-            raise Http404(u'Нет такой страницы')
-        return {'detail':detail}
+        old_detail = get_detail_by_old_url(url)
+        if not detail and old_detail:
+            return redirect(reverse(django_project.views.detail_page, args=(old_detail.url,)))
+        return super(DetailPageView,self).dispatch(request, *args, **kwargs)
+
+
+    def get_context_data(self, **kwargs):
+        url = self.args[0]
+        detail = get_detail_by_url(url)
+        if detail:
+            return {'detail':detail}
+        else:
+             raise Http404(u'Нет такой страницы')
 detail_page = DetailPageView.as_view()
-
-
-
 
 
 class CarsView(TemplateView):
@@ -176,7 +184,7 @@ class CarDetailView(TemplateView):
     template_name = 'rd/car_categories/car_category_detail.html'
     def get_context_data(self, **kwargs):
         car_detail_url = self.args[0]
-        car_category =  get_car_by_url(car_detail_url)
+        car_category = get_car_by_url(car_detail_url)
         if not car_category:
             raise Http404(u'Нет категории автомобиля %s' % car_detail_url)
         return {'car_category': car_category}

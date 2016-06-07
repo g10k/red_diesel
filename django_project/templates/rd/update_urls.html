@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!doctype html>
+
+<html lang="ru" class="no-js">
+    <head>
+        <title>{% block title %}RED Diesel — запчасти и двигатели Cummins.{% endblock title %}</title>
+    </head>
+    <body>
+
+    {% block content %}
+       {% if updated_urls %}
+           Было обновлено {{ updated_urls|length }} urls
+       {% else %}
+        Нужно обновить {{ urls|length }} urls
+
+
+
+
+        <table border="1">
+            <tr>
+                <th>#</th>
+                <th>Объект</th>
+                <th>Старый url</th>
+                <th>Новый url</th>
+            </tr>
+        {% for detal in urls %}
+            <tr>
+                <th>{{ forloop.counter }}</th>
+                <th>{{ detal }}</th>
+                <th>{{ detal.url }}</th>
+                <th>{{ detal.get_absolute_url }}</th>
+{#                {% for key, diff in co.differences.items %}#}
+{#                    <th {% if diff %}bgcolor="red"{% endif %}>{{ diff.instance_value}}</th>#}
+{#                {% endfor %}#}
+            </tr>
+            {% comment %}<tr>
+                {% for key, diff in co.differences.items %}
+                    <th {% if diff %}bgcolor="green"{% endif %}>{{ diff.excel_value}}</th>
+                {% endfor %}
+            </tr>{% endcomment %}
+        {% endfor %}
+        </table>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+            <button>Обновить</button>
+            <input type="checkbox" name="load" value="Подтврждаю"/>
+        </form>
+    {% endblock %}
+    </body>
+</html>

@@ -1,4 +1,5 @@
 # encoding: utf-8
+from django.core.urlresolvers import reverse
 from django.db import models
 from slugify import Slugify, CYRILLIC
 slugify_ru = Slugify(pretranslate=CYRILLIC)
@@ -18,6 +19,7 @@ class Detal(models.Model):
     engine = models.CharField(u'Двигатель', max_length=255, blank=True)
     automobile = models.CharField(u'Автомобиль', max_length=255, blank=True)
     related_details = models.ManyToManyField('Detal', verbose_name=u'Связанные детали', null=True, blank=True)
+    old_url = models.CharField(u'Старый url', max_length=400, blank=True)
     url = models.CharField(u'Ручной url', max_length=400)
     title = models.CharField(u'title', max_length=255, blank=True)
     description = models.CharField(u'description', max_length=255, blank=True)
@@ -47,12 +49,16 @@ class Detal(models.Model):
         return unicode(first_articul)
 
     def get_full_url(self):
-        return 'www.red-diesel.ru/zapchasti-cummins/%s' % self.get_absolute_url()
+        s = reverse('detail', args=('__',))
+        detail_path = s.replace('__',self.get_absolute_url())
+        return 'www.red-diesel.ru' + detail_path
+        # return 'www.red-diesel.ru/zapchasti-cummins/%s' % self.get_absolute_url()
 
     def get_absolute_url(self):
         # if self.url:
         #     return self.url
-        return slugify_ru('_'.join([self.articul, self.name, self.engine, self.proizvoditel])).lower()
+        engine_categories = '-'.join(self.engine_categories.values_list('name', flat=True))
+        return slugify_ru('_'.join([self.articul, self.name, engine_categories, self.proizvoditel])).lower()
 
 
 class Photo(models.Model):
@@ -116,10 +122,16 @@ class CarCategoryDetailPhoto(models.Model):
 def get_detail_by_url(url):
     if Detal.objects.filter(url=url):
         return Detal.objects.filter(url=url).first()
-    artikul = url.split('-')[0]
-    if Detal.objects.filter(articul=artikul):
-       return Detal.objects.filter(articul=artikul).first()
-    return Detal.objects.filter(articul__icontains=artikul).first()
+    # artikul = url.split('-')[0]
+    return None
+    # if Detal.objects.filter(articul=artikul):
+    #    return Detal.objects.filter(articul=artikul).first()
+    # return Detal.objects.filter(articul__icontains=artikul).first()
+
+def get_detail_by_old_url(url):
+    if Detal.objects.filter(old_url=url):
+        return Detal.objects.filter(old_url=url).first()
+    return None
 
 
 def get_car_by_url(url):
@@ -133,5 +145,6 @@ def get_engine_by_url(url):
         return EngineCategoryDetail.objects.filter(url='').filter(name=url).first()
     elif EngineCategoryDetail.objects.filter(url=url):
         return EngineCategoryDetail.objects.filter(url=url).first()
+
 
 

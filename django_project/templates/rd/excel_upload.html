@@ -12,7 +12,7 @@
         <hr>
         Из excel загружено {{ all_excel_data|length }}
         Отличающиеся объекты: {{ difference_objects|length }}
-        <table>
+        <table border="1">
             <tr>
                 <th>Объект</th>
                 <th>Внутренний артикул</th>
@@ -23,23 +23,19 @@
                 <th>Авто</th>
                 <th>Цена</th>
                 <th>Наличие на складе</th>
+                <th>Категории двигателя</th>
+                <th>Категории автомобиля</th>
             </tr>
-        {% for detail_with_diff in difference_objects %}
+        {% for co in difference_objects %}
             <tr>
-                <th>В базе</th>
-                <th>{{ detail_with_diff.inner_articul }}</th>
-                <th>{{ detail_with_diff.articul }}</th>
-                <th>{{ detail_with_diff.name }}</th>
-                <th>{{ detail_with_diff.proizvoditel }}</th>
-                <th>{{ detail_with_diff.engine }}</th>
-                <th>{{ detail_with_diff.automobile }}</th>
-                <th>{{ detail_with_diff.cost }}</th>
-                <th>{{ detail_with_diff.nalichie }}</th>
+                <th rowspan="2">{{ co.instance }}</th>
+                {% for key, diff in co.differences.items %}
+                    <th {% if diff %}bgcolor="red"{% endif %}>{{ diff.instance_value}}</th>
+                {% endfor %}
             </tr>
             <tr>
-                <th>В excel</th>
-                {% for value in detail_with_diff.difference_row %}
-                    <th {% if value %}bgcolor="green"{% endif %}>{{ value }}</th>
+                {% for key, diff in co.differences.items %}
+                    <th {% if diff %}bgcolor="green"{% endif %}>{{ diff.excel_value}}</th>
                 {% endfor %}
             </tr>
         {% endfor %}
