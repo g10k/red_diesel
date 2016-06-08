@@ -36,4 +36,5 @@ urlpatterns = patterns('',
     url(r'^about/$', TemplateView.as_view(template_name='django_project/about.html')),
     url(r'^contact/$', django_project.views.contract),
     url(r'^rd/', include(rd.urls)),
+    url(r'^tinymce/', include('tinymce.urls')),
 )
