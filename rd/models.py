@@ -5,10 +5,18 @@ from slugify import Slugify, CYRILLIC
 slugify_ru = Slugify(pretranslate=CYRILLIC)
 # Create your models here.
 
+class ExcludeDeletedManager(models.Manager):
+    """
+        Кастомный менеджер заяпросов, исключающий записи помеченные как удаленные (dd != None)
+    """
+    def get_queryset(self):
+        # исключаем из выдачи объекты, помеченные как удаленные
+        return super(ExcludeDeletedManager, self).get_queryset().exclude(dd__isnull=False)
 
 
 
-class Detal(models.Model):
+
+class Detail(models.Model):
     inner_articul = models.CharField(u'Внутренний артикул', max_length=255)
     articul = models.CharField(u'Артикул', max_length=255, db_index=True)
     name = models.TextField(u'Название')
@@ -18,14 +26,19 @@ class Detal(models.Model):
     proizvoditel = models.CharField(u'Производитель', max_length=255, blank=True)
     engine = models.CharField(u'Двигатель', max_length=255, blank=True)
     automobile = models.CharField(u'Автомобиль', max_length=255, blank=True)
-    related_details = models.ManyToManyField('Detal', verbose_name=u'Связанные детали', null=True, blank=True)
+    related_details = models.ManyToManyField('Detail', verbose_name=u'Связанные детали', null=True, blank=True)
     old_url = models.CharField(u'Старый url', max_length=400, blank=True)
     url = models.CharField(u'Ручной url', max_length=400)
     title = models.CharField(u'title', max_length=255, blank=True)
     description = models.CharField(u'description', max_length=255, blank=True)
     header = models.CharField(u'заголовок', max_length=255, blank=True)
-    engine_categories = models.ManyToManyField('EngineCategoryDetail', blank=True, null=True)
-    car_categories = models.ManyToManyField('CarCategoryDetail', blank=True, null=True)
+    engines = models.ManyToManyField('EngineCategory', blank=True, null=True)
+    cars = models.ManyToManyField('CarCategory', blank=True, null=True)
+
+    dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
+
+    objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
+    standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
 
 
     def __unicode__(self):
@@ -57,24 +70,25 @@ class Detal(models.Model):
     def get_absolute_url(self):
         # if self.url:
         #     return self.url
-        engine_categories = '-'.join(self.engine_categories.values_list('name', flat=True))
-        return slugify_ru('_'.join([self.articul, self.name, engine_categories, self.proizvoditel])).lower()
+        engines = '-'.join(self.engines.values_list('name', flat=True))
+        return slugify_ru('_'.join([self.articul, self.name, engines, self.proizvoditel])).lower()
 
 
 class Photo(models.Model):
     sort = models.IntegerField(default=1)
     title = models.CharField(u'Подпись', blank=True, max_length=255)
     image = models.ImageField(verbose_name=u'путь к картинке')
-    detal = models.ForeignKey(Detal, related_name='photos')
+    detal = models.ForeignKey(Detail, related_name='photos')
 
     class Meta:
         ordering = ['sort',]
 
-class EngineCategoryDetail(models.Model):
+class EngineCategory(models.Model):
     url = models.CharField(u'Ручной url', max_length=400, blank=True)
-    name = models.CharField(u'Категория', max_length=255, blank=True)
+    name = models.CharField(u'Категория', max_length=255, blank=False)
     title = models.CharField(u'title', max_length=255, blank=True)
     description = models.CharField(u'description', max_length=255, blank=True)
+    about_html = models.TextField(u'html', blank=True)
     keywords = models.CharField(u'keywords', max_length=255, blank=True)
     header = models.CharField(u'heading', max_length=255, blank=True)
 
@@ -85,20 +99,21 @@ class EngineCategoryDetail(models.Model):
         verbose_name = u'Категория двигателя'
 
 
-class EngineCategoryDetailPhoto(models.Model):
+class EngineCategoryPhoto(models.Model):
     sort = models.IntegerField(default=1)
     title = models.CharField(u'Подпись', blank=True, max_length=255)
     image = models.ImageField(verbose_name=u'путь к картинке', upload_to='dvigateli-cummins/' )
-    category_detal = models.ForeignKey(EngineCategoryDetail, related_name='photos')
+    category_detal = models.ForeignKey(EngineCategory, related_name='photos')
 
     class Meta:
         ordering = ['sort', ]
 
-class CarCategoryDetail(models.Model):
+class CarCategory(models.Model):
     url = models.CharField(u'Ручной url', max_length=400, blank=True)
-    name = models.CharField(u'Категория', max_length=255, blank=True)
+    name = models.CharField(u'Категория', max_length=255, blank=False)
     title = models.CharField(u'title', max_length=255, blank=True)
     description = models.CharField(u'description', max_length=255, blank=True)
+    about_html = models.TextField(u'html', blank=True)
     keywords = models.CharField(u'keywords', max_length=255, blank=True)
     header = models.CharField(u'heading', max_length=255, blank=True)
 
@@ -109,42 +124,39 @@ class CarCategoryDetail(models.Model):
         return self.name
 
 
-class CarCategoryDetailPhoto(models.Model):
+class CarCategoryPhoto(models.Model):
     sort = models.IntegerField(default=1)
     title = models.CharField(u'Подпись', blank=True, max_length=255)
     image = models.ImageField(verbose_name=u'путь к картинке', upload_to='car-categories/')
-    category_detal = models.ForeignKey(CarCategoryDetail, related_name='photos')
+    category_detal = models.ForeignKey(CarCategory, related_name='photos')
 
     class Meta:
         ordering = ['sort',]
 
 
 def get_detail_by_url(url):
-    if Detal.objects.filter(url=url):
-        return Detal.objects.filter(url=url).first()
-    # artikul = url.split('-')[0]
+    if Detail.objects.filter(url=url):
+        return Detail.objects.filter(url=url).first()
     return None
-    # if Detal.objects.filter(articul=artikul):
-    #    return Detal.objects.filter(articul=artikul).first()
-    # return Detal.objects.filter(articul__icontains=artikul).first()
+
 
 def get_detail_by_old_url(url):
-    if Detal.objects.filter(old_url=url):
-        return Detal.objects.filter(old_url=url).first()
+    if Detail.objects.filter(old_url=url):
+        return Detail.objects.filter(old_url=url).first()
     return None
 
 
 def get_car_by_url(url):
-    if CarCategoryDetail.objects.filter(url='').filter(name=url):
-        return CarCategoryDetail.objects.filter(url='').filter(name=url).first()
-    elif CarCategoryDetail.objects.filter(url=url):
-        return CarCategoryDetail.objects.filter(url=url).first()
+    if CarCategory.objects.filter(url='').filter(name=url):
+        return CarCategory.objects.filter(url='').filter(name=url).first()
+    elif CarCategory.objects.filter(url=url):
+        return CarCategory.objects.filter(url=url).first()
 
 def get_engine_by_url(url):
-    if EngineCategoryDetail.objects.filter(url='').filter(name=url):
-        return EngineCategoryDetail.objects.filter(url='').filter(name=url).first()
-    elif EngineCategoryDetail.objects.filter(url=url):
-        return EngineCategoryDetail.objects.filter(url=url).first()
+    if EngineCategory.objects.filter(url='').filter(name=url):
+        return EngineCategory.objects.filter(url='').filter(name=url).first()
+    elif EngineCategory.objects.filter(url=url):
+        return EngineCategory.objects.filter(url=url).first()
 
 
 

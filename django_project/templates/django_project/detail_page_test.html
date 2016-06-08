@@ -1,12 +1,12 @@
-{% extends 'rd/base.html' %}
+{% extends 'django_project/base.html' %}
 
 
 {% block title %}
-    {% if detail.get_cost %}
+    {% ifnotequal detail.get_cost 'Уточняйте' %}
         {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }} — купить по цене {{ detail.get_cost }} рублей.
     {% else %}
-        {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }} — купить, цена.
-    {% endif %}
+        Купить
+    {% endifnotequal %}
 {% endblock title %}
 
 {% block description %}Выгодно купить {{ detail.name }} {{ detail.articul }} для двигателя Cummins {{ detail.engine }} с доставкой по всей России.{% endblock description %}
@@ -140,6 +140,51 @@
 							<div class="col-sm-8">
 								<div class="product-page">
 									<div class="about-us-box">
+										<h3>Не забудьте купить</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="related_products">
+								<div class="col-sm-3">
+									<a href="#"><img class="img-border" src="/static/images/cummins-parts.jpg" width="100%" alt=""></a>
+									<h5><a href="#">Элемент фильтрующий воздушный (элемент безопасности) ЛААЗ QSX15-C440</a></h5>	
+									<p>ЭФВ 2506-05-583.1109080</p>
+									<p class="related_price">1574 &#8381;</p>
+								</div>
+								<div class="col-sm-3">
+									<a href="#"><img class="img-border" src="/static/images/cummins-parts.jpg" width="100%" alt=""></a>
+									<h5><a href="#">Элемент фильтрующий воздушный (элемент безопасности) ЛААЗ QSX15-C440</a></h5>
+									<p>ЭФВ 2506-05-583.1109080</p>
+									<p class="related_price">1574 &#8381;</p>
+								</div>
+								<div class="col-sm-3">
+									<a href="#"><img class="img-border" src="/static/images/cummins-parts.jpg" width="100%" alt=""></a>
+									<h5><a href="#">Элемент фильтрующий воздушный (элемент безопасности) ЛААЗ QSX15-C440</a></h5>
+									<p>ЭФВ 2506-05-583.1109080</p>
+									<p class="related_price">1574 &#8381;</p>
+								</div>
+								<div class="col-sm-3">
+									<a href="#"><img class="img-border" src="/static/images/cummins-parts.jpg" width="100%" alt=""></a>
+									<h5><a href="#">Элемент фильтрующий воздушный (элемент безопасности) ЛААЗ QSX15-C440</a></h5>
+									<p>ЭФВ 2506-05-583.1109080</p>
+									<p class="related_price">1574 &#8381;</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- End tabs section -->
+
+				<!-- tabs-section 
+					================================================== -->
+				<section class="tabs-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="product-page">
+									<div class="about-us-box">
 										<h3>Почему выбирают нас?</h3>
 									</div>
 								</div>
@@ -184,118 +229,12 @@
 				</section>
 				<!-- End tabs section -->
 
-				<!-- tabs-section 
-					================================================== -->
-{#				<section class="tabs-section">#}
-{#					<div class="container">#}
-{#						<div class="row">#}
-{#							<div class="col-sm-6">#}
-{#								<div class="product-page">#}
-{#									<div class="about-us-box">#}
-{#										<h3>Характеристики</h3>#}
-{#									</div>#}
-{#									<ul class="specs-dotted">#}
-{#										<li>#}
-{#											<span>Модификации</span>#}
-{#											<span>s3129, s4129</span>#}
-{#										</li>#}
-{#										<li>#}
-{#											<span>Применяемость</span>#}
-{#											<span>ГАЗель «Бизнес» (ГАЗ-3302, ГАЗ-2705)</span>#}
-{#										</li>#}
-{#											<ul style="padding-left: 0">#}
-{#												<li>#}
-{#													<span>&nbsp;</span>#}
-{#													<span>ГАЗель «Next»</span>#}
-{#												</li>#}
-{#												<li>#}
-{#													<span>&nbsp;</span>#}
-{#													<span>Соболь «Бизнес» (ГАЗ-2752, ГАЗ-22171)</span>#}
-{#												</li>#}
-{#												<li>#}
-{#													<span>&nbsp;</span>#}
-{#													<span>Соболь «Баргузин» (ГАЗ-2217)</span>#}
-{#												</li>#}
-{#												<li>#}
-{#													<span>&nbsp;</span>#}
-{#													<span>ПАЗ 3237-05, ПАЗ 4230-05</span>#}
-{#												</li>#}
-{#												<li>#}
-{#													<span>&nbsp;</span>#}
-{#													<span>Foton Aumark</span>#}
-{#												</li>#}
-{#											</ul>									#}
-{#										<li>#}
-{#											<span>Экологический класс</span>#}
-{#											<span>Евро 3 / Евро 4</span>#}
-{#										</li>#}
-{#									</ul>#}
-{#								</div>#}
-{#							</div>#}
-{#							<div class="col-sm-6" style="text-align: center">#}
-{#								<img src="/static/upload/engines/isf-2-8.png" width="65%" alt="">#}
-{#							</div>#}
-{#						</div>#}
-{#					</div>#}
-{#				</section>#}
-{#				<!-- End tabs section -->#}
-{##}
-{#				<!-- tabs-section #}
-{#					================================================== -->#}
-{#				<section class="tabs-section">#}
-{#					<div class="container">#}
-{#						<div class="row">#}
-{#							<div class="col-sm-6" style="text-align: center">#}
-{#								<img src="/static/upload/engines/upakovka.png" width="70%" alt="">#}
-{#							</div>#}
-{#							<div class="col-sm-6">#}
-{#								<div class="product-page">#}
-{#									<div class="about-us-box">#}
-{#										<h3>Габариты</h3>#}
-{#									</div>#}
-{#									<ul class="specs-dotted">#}
-{#										<li>#}
-{#											<span>Вес нетто</span>#}
-{#											<span>248 кг</span>#}
-{#										</li>#}
-{#										<li>#}
-{#											<span>Вес брутто</span>#}
-{#											<span>288 кг</span>#}
-{#										</li>#}
-{#										<li>#}
-{#											<span>Размер в упаковке</span>#}
-{#										</li>#}
-{#											<ul>#}
-{#												<li>#}
-{#													<span>Высота</span>#}
-{#													<span>957 мм</span>#}
-{#												</li>#}
-{#												<li>#}
-{#													<span>Длина</span>#}
-{#													<span>820 мм</span>#}
-{#												</li>#}
-{#												<li>#}
-{#													<span>Ширина</span>#}
-{#													<span>740 мм</span>#}
-{#												</li>#}
-{#											</ul>#}
-{#										<li>#}
-{#											<span>Упаковка</span>#}
-{#											<span>деревянный короб</span>#}
-{#										</li>#}
-{#									</ul>#}
-{#								</div>#}
-{#							</div>#}
-{#						</div>#}
-{#					</div>#}
-{#				</section>#}
-
 				<div id="buy-engine" class="white-popup mfp-hide">
 					<form id="buy-engine-form" method="post">
 
                     {% csrf_token %}
   						<p class="h1">Заявка на {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}</p>
-                        <input type="hidden" name="engine_model" value="Заявка на {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}">
+                        <input type="hidden" name="header" value="Заявка на {{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}">
   					<div class="row">
   						<div class="col-md-6">
   							<span>Ваше имя или название организации</span>
@@ -330,10 +269,8 @@
   							<input type="submit" id="id-buy-submit-button">
   						</div>
   					</div>
-
-                    <div id="ajax-waiting" class="hidden">Форма отправляется ...</div>
-                    <div id="success-send" class="hidden">Успешно отправлено!</div>
-                    <div id="error-send" class="error-view hidden">Ошибка формы!</div>
+                    <div id="buy-success-send" class="hidden">Успешно отправлено!</div>
+                    <div id="buy-error-send" class="error-view hidden">Ошибка формы!</div>
   					</form>
 				</div>
 
@@ -341,7 +278,6 @@
 					<form id="engine-question-form" method="post">
                     {% csrf_token %}
   						<p class="h1">Вопрос по позиции &laquo;{{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}&raquo;</p>
-                        <input type="hidden" name="engine_model" value="Вопрос по позиции &laquo;{{ detail.name }} {{ detail.articul }} на Cummins {{ detail.engine }}&raquo;">
   					<div class="row">
   					</div>
   					<div class="row">
@@ -368,10 +304,9 @@
   							<input type="submit" id="id-question-submit-button">
   						</div>
   					</div>
+                    <div id="question-success-send" class="hidden">Успешно отправлено!</div>
+                    <div id="question-error-send" class="error-view hidden">Ошибка формы!</div>
 
-                    <div id="ajax-waiting" class="hidden">Форма отправляется ...</div>
-                    <div id="success-send" class="hidden">Успешно отправлено!</div>
-                    <div id="error-send" class="error-view hidden">Ошибка формы!</div>
   					</form>
 				</div>
 		</div> <!-- конец .parts-page  -->

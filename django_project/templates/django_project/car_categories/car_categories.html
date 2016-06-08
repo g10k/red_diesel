@@ -1,0 +1,34 @@
+{% extends 'django_project/price-cummins.html' %}
+
+{% block home_section %}
+    <section class="page-banner-section parts">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h1>Запчасти на автомобили с двигателями Cummins</h1>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="page-depth">
+                        <li><a href="http://red-diesel.ru/">Главная</a></li>
+                        <li><a href="http://red-diesel.ru/cars/">Автомобили</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block tabs_section %}
+<section class="tabs-section">
+    <div class="container">
+    {% for car_category in  cars %}
+                <div style="display:inline-block; width:13%; margin:10px">
+                    <a href="{{ car_category.url|default:car_category.name }}">{{ car_category.name }}</a>
+                    {% for photo in car_category.photos.all %}
+                        <a href="{{ car_category.url|default:car_category.name }}"><img src="http://red-diesel.ru/static/uploads/{{ photo.image }}" width="100%"></a>
+                    {% endfor %}
+                </div>
+    {% endfor %}
+    </div>
+</section>
+{% endblock  %}

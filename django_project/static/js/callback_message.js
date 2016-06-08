@@ -6,7 +6,9 @@ $(document).ready(function() {
       complete: function(){
          $('#ajax-waiting').addClass('hidden');
       },
-      success: function() {}
+      success: function() {
+
+      }
     });
 
 

@@ -19,25 +19,23 @@ class Command(BaseCommand):
             required=True
         )
 
-    def set_engine_categories(self, inner_articul, engine_categories_string):
-        detail = rd.models.Detal.objects.get(inner_articul=inner_articul)
-        detail.engine_categories.all().delete()
-        for engine_category_name in engine_categories_string.split(','):
+    def set_engines(self, inner_articul, engines_string):
+        detail = rd.models.Detail.objects.get(inner_articul=inner_articul)
+        detail.engines.all().delete()
+        for engine_category_name in engines_string.split(','):
             if not engine_category_name:
                 continue
-            engine_category,created = rd.models.EngineCategoryDetail.objects.get_or_create(name=engine_category_name)
-            detail.engine_categories.add(engine_category)
+            engine_category,created = rd.models.EngineCategory.objects.get_or_create(name=engine_category_name)
+            detail.engines.add(engine_category)
 
-    def set_car_categories(self, inner_articul, car_categories_string):
-        detail = rd.models.Detal.objects.get(inner_articul=inner_articul)
-        detail.car_categories.all().delete()
-        for car_category_name in car_categories_string.split(','):
+    def set_car_categories(self, inner_articul, cars_string):
+        detail = rd.models.Detail.objects.get(inner_articul=inner_articul)
+        detail.cars.all().delete()
+        for car_category_name in cars_string.split(','):
             if not car_category_name :
                 continue
-            car_category, created = rd.models.CarCategoryDetail.objects.get_or_create(name=car_category_name)
-            detail.car_categories.add(car_category)
-
-
+            car_category, created = rd.models.CarCategory.objects.get_or_create(name=car_category_name)
+            detail.cars.add(car_category)
 
     def handle(self, *args, **options):
         file = options.get('excel_file')
@@ -46,7 +44,7 @@ class Command(BaseCommand):
         sheet = rb.sheet_by_index(0)
         if not sheet.nrows:
             return
-        rd.models.Detal.objects.all().delete()
+        rd.models.Detail.objects.all().delete()
         for rownum in range(sheet.nrows):
             row = sheet.row_values(rownum)
             inner_art, articul, name, proizvoditel, engine, auto, cost, nalichie, engine_category, car_category = row[:10]
@@ -64,7 +62,7 @@ class Command(BaseCommand):
             except:
                 print cost
 
-            d = rd.models.Detal.objects.create(
+            d = rd.models.Detail.objects.create(
                 inner_articul=inner_art,
                 articul=articul,
                 name=name,
@@ -77,5 +75,5 @@ class Command(BaseCommand):
             d.url = d.get_absolute_url()
             d.save()
 
-            self.set_engine_categories(d.inner_articul, engine_category)
+            self.set_engines(d.inner_articul, engine_category)
             self.set_car_categories(d.inner_articul, car_category)

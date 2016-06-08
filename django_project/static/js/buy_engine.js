@@ -63,8 +63,10 @@ $(function(){
     function success_send() {
         $('#buy-error-send').addClass('hidden');
         $("#buy-success-send").removeClass('hidden');
+        //setTimeout(function(){
         $('#buy-engine-form').addClass('hidden')[0].reset();
-        $.magnificPopup.close();
+            //$.magnificPopup.close();
+        //},2000);
     }
 
     $('#buy-engine-form').submit(function(event){

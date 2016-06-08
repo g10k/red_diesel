@@ -66,10 +66,8 @@ $(function(){
     function success_send() {
         $('#question-error-send').addClass('hidden');
         $("#question-success-send").removeClass('hidden');
-        $("#ajax-waiting").addClass('hidden');
-        $('#engine-question-form')[0].reset();
-        $.magnificPopup.close();
-
+        //$("#ajax-waiting").addClass('hidden');
+        $('#engine-question-form').addClass('hidden')[0].reset();
     }
 
     $('#engine-question-form').submit(function(event){

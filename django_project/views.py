@@ -117,7 +117,7 @@ question = csrf_exempt(QuestionView.as_view())
 
 class ContactView(FormView):
     form_class = django_project.forms.ContactForm
-    template_name = 'rd/contact.html'
+    template_name = 'django_project/contact.html'
     success_url = '/contact/?thanks'
 
     def form_valid(self, form):
@@ -131,28 +131,24 @@ class ContactView(FormView):
             )
 
         return super(ContactView, self).form_valid(form)
-
 contract = ContactView.as_view()
 
-
-
 import rd.models
-
 class DetailAjaxView(BaseFormView):
     def get(self, request, *args, **kwargs):
-        details = rd.models.Detal.objects.all()
+        details = rd.models.Detail.objects.all()
         engine = request.GET.get('engine')
         if engine:
-            details = details.filter(engine_categories__name=engine)
+            details = details.filter(engines__name=engine)
         car = request.GET.get('car')
         if car:
-            details = details.filter(car_categories__name=car)
+            details = details.filter(cars__name=car)
         res = [[d.articul, "<a href='http://%s'>%s</a>" % (d.get_full_url(), u' '.join([d.name, d.engine, d.proizvoditel])), d.automobile, d.get_cost() or u"Цену уточняйте", d.nalichie] for d in details]
         return JsonResponse({'data': res})
 detail = DetailAjaxView.as_view()
 
 class DetailPageView(TemplateView):
-    template_name = 'rd/detail_page.html'
+    template_name = 'django_project/detail_page.html'
 
     def dispatch(self, request, *args, **kwargs):
         url = self.args[0]
@@ -161,7 +157,6 @@ class DetailPageView(TemplateView):
         if not detail and old_detail:
             return redirect(reverse(django_project.views.detail_page, args=(old_detail.url,)))
         return super(DetailPageView,self).dispatch(request, *args, **kwargs)
-
 
     def get_context_data(self, **kwargs):
         url = self.args[0]
@@ -174,14 +169,13 @@ detail_page = DetailPageView.as_view()
 
 
 class CarsView(TemplateView):
-    template_name = 'rd/car_categories/car_categories.html'
+    template_name = 'django_project/car_categories/car_categories.html'
     def get_context_data(self, **kwargs):
-
-        return {'car_categories': rd.models.CarCategoryDetail.objects.all()}
+        return {'cars': rd.models.CarCategory.objects.all()}
 cars = CarsView.as_view()
 
 class CarDetailView(TemplateView):
-    template_name = 'rd/car_categories/car_category_detail.html'
+    template_name = 'django_project/car_categories/car_category_detail.html'
     def get_context_data(self, **kwargs):
         car_detail_url = self.args[0]
         car_category = get_car_by_url(car_detail_url)
@@ -191,16 +185,15 @@ class CarDetailView(TemplateView):
 car_detail = CarDetailView.as_view()
 
 
-
 class EnginesView(TemplateView):
-    template_name = 'rd/engines/engines_list.html'
+    template_name = 'django_project/engines/engines_list.html'
     def get_context_data(self, **kwargs):
-        return {'engines': rd.models.EngineCategoryDetail.objects.all()}
+        return {'engines': rd.models.EngineCategory.objects.all()}
 engines = EnginesView.as_view()
 
 
 class EngineDetailView(TemplateView):
-    template_name = 'rd/engines/engine_detail.html'
+    template_name = 'django_project/engines/engine_detail.html'
     def get_context_data(self, **kwargs):
         engine_detail_url = self.args[0]
         engine = get_engine_by_url(engine_detail_url)
