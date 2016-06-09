@@ -35,6 +35,8 @@ class Detail(models.Model):
     engines = models.ManyToManyField('EngineCategory', blank=True, null=True)
     cars = models.ManyToManyField('CarCategory', blank=True, null=True)
 
+    dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
+    dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
     dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
 
     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
@@ -92,6 +94,14 @@ class EngineCategory(models.Model):
     keywords = models.CharField(u'keywords', max_length=255, blank=True)
     header = models.CharField(u'heading', max_length=255, blank=True)
 
+    dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
+    dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
+    dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
+
+    objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
+    standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
+
+
     def __unicode__(self):
         return self.name
 
@@ -116,6 +126,13 @@ class CarCategory(models.Model):
     about_html = models.TextField(u'html', blank=True)
     keywords = models.CharField(u'keywords', max_length=255, blank=True)
     header = models.CharField(u'heading', max_length=255, blank=True)
+
+    dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
+    dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
+    dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
+
+    objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
+    standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
 
     class Meta:
         verbose_name = u'Категория машины'
