@@ -35,6 +35,8 @@ class Detail(models.Model):
     engines = models.ManyToManyField('EngineCategory', blank=True, null=True)
     cars = models.ManyToManyField('CarCategory', blank=True, null=True)
 
+    sort = models.IntegerField(default=1)
+
     dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
     dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
     dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
@@ -47,7 +49,7 @@ class Detail(models.Model):
         return '%s %s' % (self.articul, self.name)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['name',]
         verbose_name = u'Деталь'
         verbose_name_plural = u'Деталь'
 
@@ -83,7 +85,7 @@ class Photo(models.Model):
     detal = models.ForeignKey(Detail, related_name='photos')
 
     class Meta:
-        ordering = ['sort',]
+        ordering = ['-sort',]
 
 class EngineCategory(models.Model):
     url = models.CharField(u'Ручной url', max_length=400, blank=True)
@@ -93,6 +95,8 @@ class EngineCategory(models.Model):
     about_html = models.TextField(u'html', blank=True)
     keywords = models.CharField(u'keywords', max_length=255, blank=True)
     header = models.CharField(u'heading', max_length=255, blank=True)
+
+    sort = models.IntegerField(default=1)
 
     dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
     dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
@@ -107,6 +111,8 @@ class EngineCategory(models.Model):
 
     class Meta:
         verbose_name = u'Категория двигателя'
+        verbose_name_plural = u'Категории двигателей'
+        ordering = ['-sort', ]
 
 
 class EngineCategoryPhoto(models.Model):
@@ -116,7 +122,7 @@ class EngineCategoryPhoto(models.Model):
     category_detal = models.ForeignKey(EngineCategory, related_name='photos')
 
     class Meta:
-        ordering = ['sort', ]
+        ordering = ['-sort', ]
 
 class CarCategory(models.Model):
     url = models.CharField(u'Ручной url', max_length=400, blank=True)
@@ -127,15 +133,20 @@ class CarCategory(models.Model):
     keywords = models.CharField(u'keywords', max_length=255, blank=True)
     header = models.CharField(u'heading', max_length=255, blank=True)
 
+    sort = models.IntegerField(default=1)
+
     dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
     dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
     dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
+
 
     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
     standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
 
     class Meta:
         verbose_name = u'Категория машины'
+        verbose_name_plural = u'Категории машины'
+        ordering = ['-sort', ]
 
     def __unicode__(self):
         return self.name
@@ -148,7 +159,7 @@ class CarCategoryPhoto(models.Model):
     category_detal = models.ForeignKey(CarCategory, related_name='photos')
 
     class Meta:
-        ordering = ['sort',]
+        ordering = ['-sort',]
 
 
 def get_detail_by_url(url):
