@@ -12,8 +12,10 @@ class DetailAdmin(admin.ModelAdmin):
     inlines = [
         PhotoInline,
     ]
-    list_filter = ('cars', 'engines')
+    list_filter = ('cars', 'engines', 'nalichie')
     filter_horizontal = ('related_details',)
+    list_display = ('name', 'inner_articul', 'articul', 'cost','nalichie')
+    search_fields = ('name',)
 
 class EnginePhotoInline(admin.TabularInline):
     model = EngineCategoryPhoto
@@ -29,6 +31,9 @@ class EngineForm(forms.ModelForm):
 
 class EngineCategoryAdmin(admin.ModelAdmin):
     form = EngineForm
+    list_display = ('name', 'sort')
+    list_editable = ('sort',)
+    search_fields = ('name',)
     inlines = [
         EnginePhotoInline
     ]
@@ -41,6 +46,9 @@ class CarForm(forms.ModelForm):
 
 class CarCategoryAdmin(admin.ModelAdmin):
     form = CarForm
+    list_display = ('name', 'sort')
+    list_editable = ('sort',)
+    search_fields = ('name',)
     inlines = [
         CategoryPhotoInline
     ]
