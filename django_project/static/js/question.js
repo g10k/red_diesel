@@ -10,6 +10,15 @@ $(function(){
       success: function() {}
     });
 
+    function show_empty_question_form(){
+        $('#engine-question-form').removeClass('hidden');
+        $("#question-success-send").addClass('hidden');
+    }
+
+    $('[href="#engine-question"]').click(function(){
+      show_empty_question_form()
+    });
+
     $('#id_question_phone').inputmask({"mask": "+7 (999) 999-99-99"});
 
     function isEmail(email) {
