@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+
+
 	$('.tp-banner').show().revolution({
 		dottedOverlay:"none",
 		delay:10000,

@@ -44,7 +44,6 @@ class Detail(models.Model):
     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
     standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
 
-
     def __unicode__(self):
         return '%s %s' % (self.articul, self.name)
 
@@ -65,17 +64,16 @@ class Detail(models.Model):
         first_articul = articul.split(',')[0]
         return unicode(first_articul)
 
-    def get_full_url(self):
+    def get_url_with_domain(self):
         s = reverse('detail', args=('__',))
-        detail_path = s.replace('__',self.get_absolute_url())
+        detail_path = s.replace('__', self.get_absolute_url())
         return 'www.red-diesel.ru' + detail_path
-        # return 'www.red-diesel.ru/zapchasti-cummins/%s' % self.get_absolute_url()
 
     def get_absolute_url(self):
-        # if self.url:
-        #     return self.url
         engines = '-'.join(self.engines.values_list('name', flat=True))
-        return slugify_ru('_'.join([self.articul, self.name, engines, self.proizvoditel])).lower()
+        detail_url = slugify_ru('_'.join([self.articul, self.name, engines, self.proizvoditel])).lower()
+        reverse('detail', args=(detail_url,))
+        return reverse('detail', args=(detail_url,))
 
 
 class Photo(models.Model):

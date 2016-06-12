@@ -2,8 +2,9 @@
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http.response import HttpResponse, Http404, HttpResponsePermanentRedirect, HttpResponseRedirect
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import BaseFormView
@@ -11,7 +12,8 @@ from django.core.mail import send_mail, mail_admins
 
 import django_project.views
 import django_project.forms
-from rd.models import get_detail_by_url, get_car_by_url, get_engine_by_url,get_detail_by_old_url
+import rd.models
+from rd.models import get_detail_by_url, get_car_by_url, get_engine_by_url, get_detail_by_old_url
 
 class JsonResponse(HttpResponse):
     """
@@ -133,7 +135,38 @@ class ContactView(FormView):
         return super(ContactView, self).form_valid(form)
 contract = ContactView.as_view()
 
-import rd.models
+
+class SearchAjaxView(BaseFormView):
+    def get(self, request, *args, **kwargs):
+        details = rd.models.Detail.objects.all()
+        term = request.GET.get('term')
+        if term:
+            details = details.filter(Q(name__icontains=term) | Q(proizvoditel__icontains=term) | Q(engine__icontains=term))
+
+        if len(details) > 10:
+            all_details_count = len(details)
+            details = details[:10]
+            href = reverse('search') + '?term=%s' % term
+            res = [{'label': d.name, 'href': d.get_absolute_url()} for d in details]
+            res.append({'label': u"Всего %s результатов ..." % all_details_count, 'href':href})
+        else:
+            res = [{'label': d.name, 'href': d.get_absolute_url()} for d in details]
+        return JsonResponse(res, safe=False)
+search_detail_json = SearchAjaxView.as_view()
+
+
+class SearchView(BaseFormView):
+    def get(self, *args, **kwargs):
+        details = rd.models.Detail.objects.all()
+        term = self.request.GET.get('term')
+        if term:
+            details = details.filter(Q(name__icontains=term) | Q(proizvoditel__icontains=term)|Q(engine__icontains=term))
+        details = details
+        res = [d.name for d in details]
+        return render(self.request, 'django_project/search_detail.html', {'objects': res})
+search_detail = SearchView.as_view()
+
+
 class DetailAjaxView(BaseFormView):
     def get(self, request, *args, **kwargs):
         details = rd.models.Detail.objects.all()
@@ -143,7 +176,7 @@ class DetailAjaxView(BaseFormView):
         car = request.GET.get('car')
         if car:
             details = details.filter(cars__name=car)
-        res = [[d.articul, "<a href='http://%s'>%s</a>" % (d.get_full_url(), u' '.join([d.name, d.engine, d.proizvoditel])), d.automobile, d.get_cost() or u"Цену уточняйте", d.nalichie] for d in details]
+        res = [[d.articul, "<a href='http://%s'>%s</a>" % (d.get_url_with_domain(), u' '.join([d.name, d.engine, d.proizvoditel])), d.automobile, d.get_cost() or u"Цену уточняйте", d.nalichie] for d in details]
         return JsonResponse({'data': res})
 detail = DetailAjaxView.as_view()
 
