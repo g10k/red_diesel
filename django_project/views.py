@@ -1,14 +1,16 @@
 # -*- encoding: utf-8 -*-
 import json
+import operator
+
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http.response import HttpResponse, Http404, HttpResponsePermanentRedirect, HttpResponseRedirect
+from django.http.response import HttpResponse, Http404
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, FormView
 from django.views.generic.edit import BaseFormView
-from django.core.mail import send_mail, mail_admins
+from django.core.mail import mail_admins
 
 import django_project.views
 import django_project.forms
@@ -136,12 +138,29 @@ class ContactView(FormView):
 contract = ContactView.as_view()
 
 
+def details_search(term):
+    lookups = ['name', 'proizvoditel', 'engine']
+    words = term.split()
+    q_objects = []
+    if not words:
+        return rd.models.Detail.objects.all()
+    for lookup in lookups:
+        q_object = reduce(
+            lambda res, word: res & Q(**{"%s__icontains" % (lookup,): word}),
+            words[1:],
+            Q(**{"%s__icontains" % lookup: words[0]})
+        )
+        q_objects.append(q_object)
+    Q_all = reduce(operator.or_, q_objects)
+
+    return rd.models.Detail.objects.filter(Q_all)
+
 class SearchAjaxView(BaseFormView):
     def get(self, request, *args, **kwargs):
         details = rd.models.Detail.objects.all()
         term = request.GET.get('term')
         if term:
-            details = details.filter(Q(name__icontains=term) | Q(proizvoditel__icontains=term) | Q(engine__icontains=term))
+            details = details_search(term)
 
         if len(details) > 10:
             all_details_count = len(details)
@@ -160,9 +179,9 @@ class SearchView(BaseFormView):
         details = rd.models.Detail.objects.all()
         term = self.request.GET.get('term')
         if term:
-            details = details.filter(Q(name__icontains=term) | Q(proizvoditel__icontains=term)|Q(engine__icontains=term))
+            details = details_search(term)
         details = details
-        res = [d.name for d in details]
+        res = [d for d in details]
         return render(self.request, 'django_project/search_detail.html', {'objects': res})
 search_detail = SearchView.as_view()
 
