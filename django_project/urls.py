@@ -19,7 +19,6 @@ urlpatterns = patterns('',
     url(r'^json/question/$', django_project.views.question),
     url(r'^json/detail/$', django_project.views.detail),
     url(r'^json/search_detail/$', django_project.views.search_detail_json),
-    url(r'^search-detail/$', django_project.views.search_detail, name='search'),
 
     #########################################################
     url(r'^zapchasti-cummins/$', TemplateView.as_view(template_name='django_project/zapchasti.html'), name='zapchasti'),

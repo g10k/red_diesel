@@ -2561,3 +2561,21 @@ a:hover img.img-border {
 .related_products .col-sm-3:hover {
   background-color: #f7f7f7;
 }
+
+
+
+/*-------------------------------------------------------*/
+/* SEARCH INPUT
+/*-------------------------------------------------------*/
+
+#detail_search {
+  width: 80%;
+  border: 1px solid #fff;
+  padding: 4px;
+  background: white;
+  color: #666666;
+  font-size: 12px;
+  font-family: 'Scada', sans-serif;
+  font-weight: 400 !important;
+  float: right;
+}

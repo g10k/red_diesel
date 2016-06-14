@@ -165,27 +165,15 @@ class SearchAjaxView(BaseFormView):
         if len(details) > 10:
             all_details_count = len(details)
             details = details[:10]
-            res = [{'label': d.name, 'href': d.get_absolute_url()} for d in details]
+            res = [{'label': u' '.join([d.articul, d.name, d.engine, d.proizvoditel]), 'href': d.get_absolute_url()} for d in details]
             price_href = reverse('price')+'?search=%s' % term
             res.append({'label': u"Всего %s результатов ..." % all_details_count, 'href': price_href})
         else:
-            res = [{'label': d.name, 'href': d.get_absolute_url()} for d in details]
+            res = [{'label': u' '.join([d.articul, d.name, d.engine, d.proizvoditel]), 'href': d.get_absolute_url()} for d in details]
         return JsonResponse(res, safe=False)
 search_detail_json = SearchAjaxView.as_view()
 
 
-class SearchView(BaseFormView):
-    def get(self, *args, **kwargs):
-        details = rd.models.Detail.objects.all()
-        term = self.request.GET.get('term')
-        if term:
-            details = details_search(term)
-        details = details
-        res = [d for d in details]
-        return render(self.request, 'django_project/search_detail.html', {'objects': res})
-search_detail = SearchView.as_view()
-
-import datetime
 class DetailAjaxView(BaseFormView):
     def get(self, request, *args, **kwargs):
         details = rd.models.Detail.objects.all()
