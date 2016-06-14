@@ -328,6 +328,7 @@ p {
 }
 .top-line ul.info-list {
   margin: 0;
+  margin-top: 3px;
   padding: 0;
   overflow-x: hidden;
 }
@@ -2137,6 +2138,9 @@ footer p.copyright {
   header {
     margin-left: -500px;
   }
+  .top-line ul.info-list li p {
+    font-size: 14px;
+  }
   .project-box .project-post {
     width: 50%;
   }
@@ -2291,7 +2295,10 @@ footer p.copyright {
 }
 @media (max-width: 767px) {
   .top-line {
-    display: none;
+    display: inline-block;
+  }
+  .top-line form {
+    margin-top:15px;
   }
   .about-us-box, .product-page {
     margin-bottom: 30px;
@@ -2333,6 +2340,18 @@ footer p.copyright {
   }
 }
 @media (max-width: 500px) {
+  .top-line {
+    display: inline-block;
+  }
+  .top-line ul.info-list li {
+    width:100%;
+  }
+  .top-line ul.info-list li:after {
+    display: none;
+  }
+  .top-line form {
+    margin-top:15px;
+  }
   .project-box .project-post {
     width: 100%;
   }
@@ -2569,13 +2588,27 @@ a:hover img.img-border {
 /*-------------------------------------------------------*/
 
 #detail_search {
-  width: 80%;
-  border: 1px solid #fff;
-  padding: 4px;
+  width: 100%;
   background: white;
   color: #666666;
   font-size: 12px;
-  font-family: 'Scada', sans-serif;
   font-weight: 400 !important;
   float: right;
+  border: 0;
 }
+#detail_search:focus {
+  border: 0;
+  box-shadow:none;
+ -webkit-box-shadow:none;
+}
+.btn {
+  border-radius: 0;
+  color:#fff;
+  background-color: #e40606;
+  border: 1px solid #e40606;
+ }
+ .btn:hover {
+  color:#e40606;
+  background-color: #f7f7f7;
+  border: 1px solid #f7f7f7;
+ }

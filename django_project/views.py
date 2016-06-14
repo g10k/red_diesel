@@ -139,7 +139,7 @@ contract = ContactView.as_view()
 
 
 def details_search(term):
-    lookups = ['name', 'proizvoditel', 'engine']
+    lookups = ['articul', 'name', 'proizvoditel', 'engine']
     words = term.split()
     q_objects = []
     if not words:

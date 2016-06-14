@@ -86,8 +86,15 @@
 								</ul>
 							</div>
 							<div class="col-sm-4">
-								<span id='price_url' data-search-url="{% url 'price' %}"></span>
-                				<input id="detail_search" type="search" placeholder="Введите название или артикул детали" value="{{ request.GET.term }}">
+                				<div role="search">
+								    <div class="input-group add-on">
+								    	<span id='price_url' data-search-url="{% url 'price' %}"></span>
+								      	<input id="detail_search" type="search" class="form-control" placeholder="Поиск" value="{{ request.GET.term }}">
+								      	<div class="input-group-btn">
+								        	<button id="search_button" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+								      	</div>
+								    </div>
+								</div>
 							</div>
 						</div>
 					</div>
