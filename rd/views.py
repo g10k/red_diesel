@@ -96,7 +96,8 @@ EXCEL_KEYS = OrderedDict([
     (u'Цена RED Diesel', {'clean': clean_cost, 'field': 'cost'}),
     (u'Наличие на складе', {'clean': simple_clean, 'field': 'nalichie'}),
     (u'Категория Двигатель', {'clean': simple_clean, 'field': 'engines', 'm2m':'name','m2m_clean': name_clean, 'm2m_model': rd.models.EngineCategory}),
-    (u'Категория Авто', {'clean': simple_clean, 'field': 'cars', 'm2m':'name','m2m_clean': name_clean, 'm2m_model': rd.models.CarCategory})
+    (u'Категория Авто', {'clean': simple_clean, 'field': 'cars', 'm2m':'name', 'm2m_clean': name_clean, 'm2m_model': rd.models.CarCategory}),
+    (u'Категория Товара', {'clean': simple_clean, 'field': 'category', 'fk': 'name', 'fk_clean': name_clean, 'fk_model': rd.models.DetailCategory})
 ])
 
 class ExcelComparasion(object):
@@ -204,6 +205,28 @@ def update_model_m2m(instance, related_field, primary_field, new_value, clean_me
     for rel_instance in related_instances:
         getattr(instance, related_field).add(rel_instance)
 
+def update_model_fk(instance, related_field, primary_field,new_value, clean_method):
+    """
+
+    :param instance: detail
+    :param related_field:  category
+    :param primary_field: name
+    :param new_value: 'коленвал'
+    :param clean_method:
+    :return:
+    """
+    related_model = instance._meta.get_field_by_name(related_field)[0].related_model().__class__
+
+    # related_model = getattr(instance, related_field).model
+    cleaned_excel_value = clean_method(new_value)
+    obj, created = related_model.objects.get_or_create(**{primary_field: cleaned_excel_value})
+    # exists_objects = related_model.objects.filter(**{primary_field: new_value})
+    # if exists_objects:
+    setattr(instance, related_field, obj)
+    instance.save()
+    # else:
+    #     related_model.objects.create(**{primary_field: new_value})
+
 
 class UpdateObject(object):
     keys = EXCEL_KEYS
@@ -220,7 +243,11 @@ class UpdateObject(object):
             key_info = diff_values.get('key_info')
             if key_info.get('m2m'):
                 primary_field = key_info.get('m2m')
-                update_model_m2m(instance, difference_field, primary_field, diff_values.get('excel_value'),key_info.get('m2m_clean'))
+                update_model_m2m(instance, difference_field, primary_field, diff_values.get('excel_value'), key_info.get('m2m_clean'))
+            elif key_info.get('fk'):
+                # related_field = key_info.get('field')
+                primary_field = key_info.get('fk')
+                update_model_fk(instance, difference_field, primary_field, diff_values.get('excel_value'), key_info.get('fk_clean'))
             else:
                 setattr(instance, difference_field, diff_values['excel_value'])
         instance.save()
@@ -233,10 +260,18 @@ class NewObject(object):
 
         # Создаем деталь
         for excel_value, key_info in zip(excel_row, self.keys.values()):
-            if key_info.get('m2m'):
+            if key_info.get('m2m') or key_info.get('fk'):
                 continue
             detail_instance_params[key_info.get('field')] = key_info.get('clean')(excel_value)
         detail_instance = rd.models.Detail.objects.create(**detail_instance_params)
+
+
+        # Наполняем Ставим ForeignKey
+        for excel_value, key_info in zip(excel_row, self.keys.values()):
+            if key_info.get('fk'):
+                related_field = key_info.get('field')
+                primary_field = key_info.get('fk')
+                update_model_fk(detail_instance, related_field, primary_field, excel_value, key_info.get('fk_clean'))
 
         # Наполняем m2m
         for excel_value, key_info in zip(excel_row, self.keys.values()):
@@ -259,7 +294,7 @@ class CompareObject(object):
             self.compare_values()
         else:
             # TODO: СОздать новый
-            new_instance_values = dict([(key_data['field'], excel_value) for (key, key_data), excel_value in zip(self.keys.items(), excel_row) if not key_data.get('m2m')] )
+            new_instance_values = dict([(key_data['field'], excel_value) for (key, key_data), excel_value in zip(self.keys.items(), excel_row) if not (key_data.get('m2m') or key_data.get('fk'))] )
             detal = rd.models.Detail(**new_instance_values)
             self.instance = detal
             self.is_new = True
@@ -279,6 +314,19 @@ class CompareObject(object):
                     self.differences[key_info['field']] = {'excel_value': excel_value, 'instance_value': instance_value, 'column_name': column_name, 'key_info':key_info, 'm2m': key_info['m2m'], 'field':key_info['field']}
                 else:
                     self.differences[key_info['field']] = None
+            elif key_info.get('fk'):
+                clean_method = key_info.get('fk_clean')
+                inst_related_obj = getattr(self.instance, key_info['field'])
+                cleaned_excel_value = clean_method(excel_value)
+                if not inst_related_obj and not cleaned_excel_value:
+                    self.differences[key_info['field']] = None
+                    continue
+                elif not inst_related_obj and cleaned_excel_value:
+                    self.differences[key_info['field']] = {'excel_value': excel_value, 'instance_value': '', 'column_name': column_name, 'key_info': key_info, 'fk': key_info['fk'], 'field':key_info['field']}
+                else:
+                    inst_related_value = getattr(inst_related_obj, key_info['fk'])
+                    if inst_related_value != cleaned_excel_value:
+                        self.differences[key_info['field']] = {'excel_value': cleaned_excel_value, 'instance_value': inst_related_value, 'column_name': column_name, 'key_info': key_info, 'fk': key_info['fk'], 'field':key_info['field']}
             else:
                 excel_value = key_info['clean'](excel_value)
                 instance_value = getattr(self.instance, key_info['field'])

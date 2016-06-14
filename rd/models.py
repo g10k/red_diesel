@@ -34,6 +34,7 @@ class Detail(models.Model):
     header = models.CharField(u'заголовок', max_length=255, blank=True)
     engines = models.ManyToManyField('EngineCategory', blank=True, null=True)
     cars = models.ManyToManyField('CarCategory', blank=True, null=True)
+    category = models.ForeignKey('DetailCategory', verbose_name=u'Категория товара', blank=True, null=True, related_name='details')
 
     sort = models.IntegerField(default=1)
 
@@ -75,6 +76,27 @@ class Detail(models.Model):
         reverse('detail', args=(detail_url,))
         return reverse('detail', args=(detail_url,))
 
+
+
+class DetailCategory(models.Model):
+    name = models.CharField(u'Название', max_length=255)
+    sort = models.IntegerField(default=1)
+    related_category = models.ForeignKey('self', blank=True, null=True)
+
+    dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
+    dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
+    dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
+
+    objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
+    standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
+
+    def __unicode__(self):
+        return '%s' % (self.name,)
+
+    class Meta:
+        ordering = ['name', ]
+        verbose_name = u'Категория деталей'
+        verbose_name_plural = u'Категории деталей'
 
 class Photo(models.Model):
     sort = models.IntegerField(default=1)

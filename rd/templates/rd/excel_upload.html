@@ -61,6 +61,7 @@
                     <th>Наличие на складе</th>
                     <th>Категории двигателя</th>
                     <th>Категории автомобиля</th>
+                    <th>Категория детали</th>
                 </tr>
             {% for co in difference_objects %}
                 <tr>
@@ -111,6 +112,7 @@
                             <td>{{ detail.nalichie }}</td>
                             <td>{{ detail.engines.all }}</td>
                             <td>{{ detail.cars.all }}</td>
+                            <td>{{ detail.category }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
