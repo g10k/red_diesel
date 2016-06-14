@@ -165,9 +165,9 @@ class SearchAjaxView(BaseFormView):
         if len(details) > 10:
             all_details_count = len(details)
             details = details[:10]
-            href = reverse('search') + '?term=%s' % term
             res = [{'label': d.name, 'href': d.get_absolute_url()} for d in details]
-            res.append({'label': u"Всего %s результатов ..." % all_details_count, 'href':href})
+            price_href = reverse('price')+'?search=%s' % term
+            res.append({'label': u"Всего %s результатов ..." % all_details_count, 'href': price_href})
         else:
             res = [{'label': d.name, 'href': d.get_absolute_url()} for d in details]
         return JsonResponse(res, safe=False)
@@ -185,7 +185,7 @@ class SearchView(BaseFormView):
         return render(self.request, 'django_project/search_detail.html', {'objects': res})
 search_detail = SearchView.as_view()
 
-
+import datetime
 class DetailAjaxView(BaseFormView):
     def get(self, request, *args, **kwargs):
         details = rd.models.Detail.objects.all()
@@ -195,7 +195,15 @@ class DetailAjaxView(BaseFormView):
         car = request.GET.get('car')
         if car:
             details = details.filter(cars__name=car)
-        res = [[d.articul, "<a href='http://%s'>%s</a>" % (d.get_url_with_domain(), u' '.join([d.name, d.engine, d.proizvoditel])), d.automobile, d.get_cost() or u"Цену уточняйте", d.nalichie] for d in details]
+
+        res = [[
+                d.articul,
+                "<a href='http://%s'>%s</a>" % ('www.red-diesel.ru'+reverse('detail', args=(d.url,)), u' '.join([d.name, d.engine, d.proizvoditel])),
+                d.automobile,
+                d.get_cost() or u"Цену уточняйте",
+                d.nalichie
+               ]
+            for d in details]
         return JsonResponse({'data': res})
 detail = DetailAjaxView.as_view()
 

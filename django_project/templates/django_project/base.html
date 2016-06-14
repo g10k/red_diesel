@@ -72,7 +72,7 @@
 				<div class="top-line">
 					<div class="container">
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-8">
 								<ul class="info-list">
 									<li>
 										<p><i class="fa fa-phone"></i><a onclick="yaCounter35449350.reachGoal('PhoneTopClick'); return true;" id="phone-top" href="tel:84993942904">8&nbsp;(499)&nbsp;394-29-04</a></p>
@@ -84,13 +84,14 @@
 										<p><i class="fa fa-envelope"></i><a id="email-top" onclick="yaCounter35449350.reachGoal('EmailTopClick'); return true;" href="mailto:info@red-diesel.ru">info@red-diesel.ru</a></p>
 									</li>
 								</ul>
-							</div>	
+							</div>
+							<div class="col-sm-4">
+								<span id='price_url' data-search-url="{% url 'price' %}"></span>
+                				<input id="detail_search" type="search" placeholder="Введите название или артикул детали" value="{{ request.GET.term }}">
+							</div>
 						</div>
 					</div>
 				</div>
-                <span id='search_url' data-search-url="{% url 'search' %}"></span>
-                <input id="detail_search" type="text" value="{{ request.GET.term }}">
-
 				<!-- home-section
 					================================================== -->
                 {% block content %}

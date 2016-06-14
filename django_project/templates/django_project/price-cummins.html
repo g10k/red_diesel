@@ -127,12 +127,31 @@
 <script type="text/javascript" src="/static/DataTables/datatables.min.js"></script>
 <script type="text/javascript">
         $(document).ready( function () {
+
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            var search_text = getParameterByName('search') || '';
+            if (search_text){
+                console.log(search_text);
+{#                $('input [type="search"][aria-controls="price"]').val(search_text);#}
+            }
+
             $('#price').DataTable( {
                 "lengthMenu": [ [50, 250, 500, -1], [50, 250, 500, "Все"] ],
 {#                "bAutoWidth": true,#}
 {#                "autoWidth": true,#}
 {#                responsive: true,#}
                 ajax: '/json/detail/',
+                "search": {'search':search_text},
+                "deferRender": true,
                 language: {
                   "processing": "Подождите...",
                   "search": "Поиск:",
@@ -155,8 +174,9 @@
                     "sortAscending": ": активировать для сортировки столбца по возрастанию",
                     "sortDescending": ": активировать для сортировки столбца по убыванию"
                         }
-                    }
-                } );
-            } );
+
+                }
+            });
+        });
 </script>
 {% endblock  %}
