@@ -1,4 +1,14 @@
 $(function(){
+    $.extend($.ui.autocomplete.prototype.options, {
+        open: function(event, ui) {
+            $(this).autocomplete("widget").css({
+                "width": ("324px"),
+                'align':'right',
+            });
+        }
+    });
+
+
      $('#detail_search').autocomplete({
         source: "/json/search_detail",
         select: function(event, ui){

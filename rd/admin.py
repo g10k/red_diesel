@@ -24,7 +24,7 @@ class CategoryPhotoInline(admin.TabularInline):
     model = CarCategoryPhoto
 
 class EngineForm(forms.ModelForm):
-    about_html = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}))
+    about_html = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}), required=False)
     class Meta:
         model = EngineCategory
         fields = '__all__'
@@ -39,7 +39,7 @@ class EngineCategoryAdmin(admin.ModelAdmin):
     ]
 
 class CarForm(forms.ModelForm):
-    about_html = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}))
+    about_html = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 10}),required=False)
     class Meta:
         model = CarCategory
         fields = '__all__'

@@ -1,28 +1,10 @@
 {% extends 'django_project/base.html' %}
 
-{% block title %}
-    {% if car_category.header %}
-        {{ car_category.header }}
-    {% else %}
-        Запчасти на {{ car_category.title }} с Cummins: купить, цена, прайс-лист.
-    {% endif %}
-{% endblock title %}
+{% block title %}{% if car_category.header %}{{ car_category.header }}{% else %}Запчасти на {{ car_category.title }} с Cummins: купить, цена, прайс-лист.{% endif %}{% endblock title %}
 
-{% block description %}
-    {% if car_category.description %}
-        {{ car_category.description }}
-    {% else %}
-        Полный ассортимент запчастей для автомобилей {{ car_category.title }} с двигателями Cummins в наличии. Лучшие цены, оперативная доставка, гарантия.
-    {% endif %}
-{% endblock description %}
+{% block description %}{% if car_category.description %}{{ car_category.description }}{% else %}Полный ассортимент запчастей для автомобилей {{ car_category.title }} с двигателями Cummins в наличии. Лучшие цены, оперативная доставка, гарантия.{% endif %}{% endblock description %}
 
-{% block keywords %}
-    {% if car_category.keywords %}
-        {{ car_category.keywords }}
-    {% else %}
-        Запчасти на {{ car_category.title }} Cummins
-    {% endif %}
-{% endblock %}
+{% block keywords %}{% if car_category.keywords %}{{ car_category.keywords }}{% else %}Запчасти на {{ car_category.title }} Cummins{% endif %}{% endblock %}
 
 
 <!-- {{ car_category }}
