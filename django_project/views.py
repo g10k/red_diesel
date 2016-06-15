@@ -139,19 +139,20 @@ contract = ContactView.as_view()
 
 
 def details_search(term):
-    lookups = ['articul', 'name', 'proizvoditel', 'engine']
+    lookups = ['articul', 'name', 'proizvoditel', 'engine', 'automobile']
     words = term.split()
     q_objects = []
     if not words:
         return rd.models.Detail.objects.all()
-    for lookup in lookups:
+
+    for word in words:
         q_object = reduce(
-            lambda res, word: res & Q(**{"%s__icontains" % (lookup,): word}),
-            words[1:],
-            Q(**{"%s__icontains" % lookup: words[0]})
+            lambda res, lookup: res | Q(**{"%s__icontains" % (lookup,): word}),
+            lookups[1:],
+            Q(**{"%s__icontains" % lookups[0]: word})
         )
         q_objects.append(q_object)
-    Q_all = reduce(operator.or_, q_objects)
+    Q_all = reduce(operator.and_, q_objects)
 
     return rd.models.Detail.objects.filter(Q_all)
 
