@@ -1,28 +1,10 @@
 {% extends 'django_project/base.html' %}
 
-{% block title %}
-    {% if engine.header %}
-        {{ engine.header }}
-    {% else %}
-        Запчасти для двигателя {{ engine.title }}: купить, цена, прайс-лист.
-    {% endif %}
-{% endblock title %}
+{% block title %}{% if engine.header %}{{ engine.header }}{% else %}Запчасти для двигателя Cummins {{ engine.title }}: купить, цена, прайс-лист.{% endif %}{% endblock title %}
 
-{% block description %}
-    {% if engine.description %}
-        {{ engine.description }}
-    {% else %}
-        Полный ассортимент запчастей для двигателя {{ engine.title }} в наличии. Лучшие цены, оперативная доставка, гарантия.
-    {% endif %}
-{% endblock description %}
+{% block description %}{% if engine.description %}{{ engine.description }}{% else %}Полный ассортимент запчастей для двигателя Cummins {{ engine.title }} в наличии. Лучшие цены, оперативная доставка, гарантия.{% endif %}{% endblock description %}
 
-{% block keywords %}
-    {% if engine.keywords %}
-        {{ engine.keywords }}
-    {% else %}
-        Запчасти на {{ engine.title }}
-    {% endif %}
-{% endblock %}
+{% block keywords %}{% if engine.keywords %}{{ engine.keywords }}{% else %}Запчасти на Cummins {{ engine.title }}{% endif %}{% endblock %}
 
 {% block content%}
     <div class="parts-page">
@@ -30,7 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1>Запчасти для двигателя {{ engine.title }}</h1>
+                        <h1>Запчасти для двигателя Cummins {{ engine.title }}</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -38,7 +20,7 @@
                         <ul class="page-depth">
                             <li><a href="http://red-diesel.ru/">Главная</a></li>
                             <li><a href="http://red-diesel.ru/zapchasti-cummins/">Запчасти Cummins</a></li>
-                            <li>Запчасти для двигателя {{ engine.title }}</li>
+                            <li>Запчасти для двигателя Cummins {{ engine.title }}</li>
                         </ul>
                     </div>
                 </div>
@@ -48,13 +30,14 @@
         <section class="tabs-section">
         <div class="container">
             <div class="row">
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <div class="about-us-box">
+                        {% if engine.about_html %}{{ engine.about_html|safe }}{% else %}
                         <p>В каталоге представлен базовый ассортимент запчастей для двигателей Cummins. Поставка отсутствующих в прайсе позиций рассматривается в индивидуальном порядке, на заказ.</p>
-                        <p>Для Вашего удобства в прайс-листе реализована возможность поиска по наименованию или артикулу, а также сортировка всего списка запчастей по артикулу, наименованию, цене или наличию. Прайс-лист обновляется раз в неделю, поэтому актуальность цен и наличия всегда можно уточнить у наших менеджеров через контактные формы или по телефонам.</p>
+                        <p>Для Вашего удобства в прайс-листе реализована возможность поиска по наименованию или артикулу, а также сортировка всего списка запчастей по артикулу, наименованию, цене или наличию. Прайс-лист обновляется раз в неделю, поэтому актуальность цен и наличия всегда можно уточнить у наших менеджеров через контактные формы или по телефонам.</p>{% endif %}
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     {% for engine_photo in engine.photos.all %}
                         <img src="{{ engine_photo.image.url }}" width="100%">
                     {% empty %}
