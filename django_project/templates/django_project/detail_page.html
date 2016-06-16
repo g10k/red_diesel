@@ -115,11 +115,21 @@
 										</li>							
 										<li>
 											<span>Для двигателей</span>
-											<span>{{ detail.engine }}</span>
+											<span>
+                                                {% for engine_category in detail.engines.all %}
+                                                    <a href="{% url 'trucks_detail' engine_category.name %}">{{ engine_category }}</a>
+                                                {% endfor %}
+                                                {{ detail.engine }}
+                                            </span>
 										</li>
 										<li>
 											<span>Для автомобилей</span>
-											<span>{{ detail.automobile }}</span>
+											<span>
+                                                {% for car_category in detail.cars.all %}
+                                                    <a href="{% url 'trucks_detail' car_category.name %}">{{ car_category }}</a>
+                                                {% endfor %}
+                                                {{ detail.automobile }}
+                                            </span>
 										</li>
 									</ul>
 								</div>
