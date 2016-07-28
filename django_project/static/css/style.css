@@ -521,7 +521,7 @@ a.button-one:nth-child(even){
   margin-left: 10px;
 }
 .banner-section {
-  padding: 20px 0;
+  padding: 25px 0;
   background: #e40606;
   text-align: center;
 }
@@ -735,7 +735,7 @@ button.mfp-arrow {
   font-weight: 700;
   text-transform: uppercase;
   color: #222222;
-  margin: 0 0 20px;
+  margin: 0 0 25px;
   padding-bottom: 20px;
   position: relative;
 }
@@ -845,6 +845,17 @@ button.mfp-arrow {
   font-size: 18px;
   color: #ffffff;
   margin-right: 10px;
+}
+.tabs-section .about-us-box .about-us-lyrics span a {
+  display: inline;
+  float: none;
+  background: none;
+  color: #333;
+  font-size: 16px;
+  text-decoration: underline;
+}
+.tabs-section .about-us-box .about-us-lyrics span a:hover {
+  color: #e40606;
 }
 .tabs-section .about-us-box .about-us-lyrics>i {
   color:#e40606;
@@ -1301,7 +1312,7 @@ button.mfp-arrow {
 /* =  about page
 /*-------------------------------------------------*/
 .page-banner-section {
-  padding: 46px 0;
+  padding: 33px 0;
   position: relative;
   background-color: #f7f7f7;
   background-size: cover;
@@ -1309,9 +1320,9 @@ button.mfp-arrow {
   -moz-background-size: cover;
   -o-background-size: cover;
 }
-.engines {
+/*.engines {
   background: url('../images/engines.jpg') center;
-}
+}*/
 .parts {
   background: url('../images/about.jpg') center;
 }
@@ -1341,7 +1352,7 @@ button.mfp-arrow {
   margin-top: 7px;
   margin-bottom: 0;
 }
-.engines h1, .parts h1, .about h1 {
+/*.engines h1, .parts h1, .about h1 {
   color: #fff;
   font-size: 24px;
   font-family: 'Scada', sans-serif;
@@ -1349,13 +1360,13 @@ button.mfp-arrow {
   margin: 0 0 15px;
   margin-bottom: 0;
   text-shadow: #999 1px 1px 1px;
-}
+}*/
 .page-banner-section ul.page-depth {
   margin: 0;
   padding: 0;
   text-align: right;
 }
-.parts-page ul.page-depth {
+.parts-page ul.page-depth, .engines-page ul.page-depth {
   margin-top: 10px;
 }
 .page-banner-section ul.page-depth li {
@@ -1363,12 +1374,7 @@ button.mfp-arrow {
   margin-left: 1px;
   font-size: 13px;
   font-family: 'Scada', sans-serif;
-  color: #ffffff;
-  text-shadow: #999 1px 1px 1px;
-}
-.parts-page ul.page-depth li {
   color: #6a6a6a;
-  text-shadow: none;
 }
 .page-banner-section ul.page-depth li a {
   display: inline-block;
@@ -1379,23 +1385,12 @@ button.mfp-arrow {
   -o-transition: all 0.2s ease-in-out;
   font-size: 13px;
   font-family: 'Scada', sans-serif;
-  color: #ffffff;
-}
-.parts-page ul.page-depth li a {
   color: #6a6a6a;
 }
 .page-banner-section ul.page-depth li a:hover {
   color: #e40606;
 }
 .page-banner-section ul.page-depth li:before {
-  content: '-';
-  font-size: 13px;
-  font-family: 'Scada', sans-serif;
-  color: #ffffff;
-  margin-right: 5px;
-  margin-left: 5px;
-}
-.parts-page ul.page-depth li:before {
   content: '-';
   font-size: 13px;
   font-family: 'Scada', sans-serif;
@@ -2577,7 +2572,17 @@ a:hover img.img-border {
   color:#e40606;
 }
 
-.related_products .col-sm-3:hover {
+.engines-catalog {
+  padding-top: 0;
+}
+.engines-catalog .col-sm-3 {
+  padding-top: 20px;
+  margin-top: 25px;
+}
+.engines-catalog .team-post {
+  margin-bottom: 20px;
+}
+.related_products .col-sm-3:hover, .engines-catalog .col-sm-3:hover {
   background-color: #f7f7f7;
 }
 

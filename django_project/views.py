@@ -211,7 +211,7 @@ class DetailPageView(TemplateView):
         url = self.args[0]
         detail = get_detail_by_url(url)
         if detail:
-            return {'detail':detail}
+            return {'detail': detail}
         else:
              raise Http404(u'Нет такой страницы')
 detail_page = DetailPageView.as_view()
@@ -241,12 +241,12 @@ class EnginesView(TemplateView):
 engines = EnginesView.as_view()
 
 
-class EngineDetailView(TemplateView):
-    template_name = 'django_project/engines/engine_detail.html'
+class EngineDetaliView(TemplateView):
+    template_name = 'django_project/engines/engine_detali.html'
     def get_context_data(self, **kwargs):
         engine_detail_url = self.args[0]
         engine = get_engine_by_url(engine_detail_url)
         if not engine:
             raise Http404(u'Нет двигателя %s' % engine_detail_url)
         return {'engine': engine}
-engine_detail = EngineDetailView.as_view()
+engine_detali = EngineDetaliView.as_view()

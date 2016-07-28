@@ -5,11 +5,20 @@
 {% block description %}Полный ассортимент запчастей для всех моделей двигателей Cummins для отечественной и зарубежной техники. Доставка во все регионы РФ.{% endblock description %}
 
 {% block home_section %}
-    <section class="page-banner-section parts">
+<div>
+    <section class="page-banner-section">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <h1>Запчасти для двигателей Cummins</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="page-depth" itemscope itemtype="http://schema.org/BreadcrumbList">
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="http://red-diesel.ru/"><span itemprop="name">Главная</span></a><meta itemprop="position" content="1" /></li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name">Запчасти Cummins</span><meta itemprop="position" content="2" /></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -26,13 +35,13 @@
 {% block tabs_section %}
     <section class="tabs-section">
         <div class="container">
-            <div class="row">
+<!--             <div class="row">
                     <div class="col-sm-12">
                         <div class="about-us-box">
                             <h2>Запчасти на ГАЗель, КамАЗ, ПАЗ, ЛиАЗ с двигателями Камминз</h2>
                         </div>
                     </div>
-                </div>
+                </div> -->
             <div class="row">
                 <div class="col-sm-12">
                     <div class="about-us-box">
@@ -67,31 +76,15 @@
                     <div class="about-us-box">
                         <div class="about-us-lyrics">
                             <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>ISF 2.8, 3.8</span>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/isf/">ISF 2.8, 3.8</a></span>
                         </div>
                         <div class="about-us-lyrics">
                             <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>4ISBe, 6ISBe, ISDe</span>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/isbe/">4ISBe, 6ISBe, ISDe</a></span>
                         </div>
                         <div class="about-us-lyrics">
                             <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>4BT, 6BT, EQB, QSB</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="about-us-box">
-                        <div class="about-us-lyrics">
-                            <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>C8.3, 6CT, QSC, ISC</span>
-                        </div>
-                        <div class="about-us-lyrics">
-                            <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>L, ISLe, QSL</span>
-                        </div>
-                        <div class="about-us-lyrics">
-                            <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>M11, QSM, ISMe</span>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/bt/">4BT, 6BT, EQB, QSB</a></span>
                         </div>
                     </div>
                 </div>
@@ -99,22 +92,38 @@
                     <div class="about-us-box">
                         <div class="about-us-lyrics">
                             <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>ISX, QSX</span>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/6ct/">C8.3, 6CT, QSC, ISC</a></span>
                         </div>
                         <div class="about-us-lyrics">
                             <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>K19, QSK19</span>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/isl/">L, ISLe, QSL</a></span>
                         </div>
                         <div class="about-us-lyrics">
                             <a href="#"><i class="fa fa-cogs"></i></a>
-                            <span>...и другие!</span>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/m11/">M11, QSM, ISMe</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="about-us-box">
+                        <div class="about-us-lyrics">
+                            <a href="#"><i class="fa fa-cogs"></i></a>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/isx/">ISX, QSX</a></span>
+                        </div>
+                        <div class="about-us-lyrics">
+                            <a href="#"><i class="fa fa-cogs"></i></a>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/k19/">K19, QSK19</a></span>
+                        </div>
+                        <div class="about-us-lyrics">
+                            <a href="#"><i class="fa fa-cogs"></i></a>
+                            <span><a href="http://red-diesel.ru/zapchasti-cummins/a/">A1400, A1700, A2000 и A2400</a></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+</div>
 {% endblock  %}
 
 {% block extra_head %} {% endblock  %}

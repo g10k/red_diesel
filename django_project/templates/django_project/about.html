@@ -7,13 +7,22 @@
 {% endblock %}
 
 {% block banner_section %}
-    <section class="page-banner-section about">
+<div>
+    <section class="page-banner-section">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <h1>О нас</h1>
                 </div>
             </div>
+            <div class="row">
+				<div class="col-sm-12">
+					<ul class="page-depth" itemscope itemtype="http://schema.org/BreadcrumbList">
+						<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="http://red-diesel.ru/"><span itemprop="name">Главная</span></a><meta itemprop="position" content="1" /></li>
+						<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name">О нас</span><meta itemprop="position" content="2" /></li>
+					</ul>
+				</div>
+			</div>
         </div>
     </section>
 {% endblock %}
@@ -132,6 +141,7 @@
             </div>
         </div>
     </section>
+</div>
 {% endblock %}
 
 {% block extra_head %} {% endblock  %}

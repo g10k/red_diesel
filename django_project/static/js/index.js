@@ -6,7 +6,7 @@ $(document).ready(function() {
 		dottedOverlay:"none",
 		delay:10000,
 		startwidth:1140,
-		startheight:595,
+		startheight:545,
 		hideThumbs:200,
 
 		thumbWidth:100,

@@ -1,6 +1,6 @@
 {% extends 'django_project/base.html' %}
 
-{% block title %}Купить двигатель Cummins ISF 3.8 по цене 445000 рублей.{% endblock title %}
+{% block title %}Купить двигатель Cummins ISF 3.8 на ГАЗ Валдай, ПАЗ по цене 445000 рублей.{% endblock title %}
 
 {% block description %}Новые двигатели Cummins ISF 3.8 на ГАЗ, ПАЗ, МАЗ, Foton. Полная комплектация. Гарантия завода-изготовителя. Доставка по всей России.{% endblock description %}
 
@@ -13,20 +13,23 @@
 {% endblock %}
 
 {% block banner_section %}
-				<section class="page-banner-section engines">
+			<div>
+				<section class="page-banner-section">
 					<div class="container">
 						<div class="row">
-							<div class="col-sm-7">
+							<div class="col-sm-12">
 								<h1>Продажа двигателей Cummins ISF 3.8</h1>
 							</div>
-							<div class="col-sm-5">
-								<ul class="page-depth">
-									<li><a href="http://red-diesel.ru/">Главная</a></li>
-									<li><a href="http://red-diesel.ru/dvigateli-cummins/">Двигатели Cummins</a></li>
-									<li>Cummins ISF 3.8</li>
-								</ul>
-							</div>
 						</div>
+						<div class="row">
+			                <div class="col-sm-12">
+			                    <ul class="page-depth" itemscope itemtype="http://schema.org/BreadcrumbList">
+			                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="http://red-diesel.ru/"><span itemprop="name">Главная</span></a><meta itemprop="position" content="1" /></li>
+									<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="http://red-diesel.ru/dvigateli-cummins/"><span itemprop="name">Двигатели в сборе</span></a><meta itemprop="position" content="2" /></li>
+									<li itemprop="itemListElement"><span itemprop="name">Cummins ISF 3.8</span><meta itemprop="position" content="3" /></li>
+			                    </ul>
+			                </div>
+            			</div>
 					</div>
 				</section>
 {% endblock %}
@@ -38,12 +41,12 @@
 				<section class="tabs-section">
 					<div class="container">
 						<div class="row">
-								<div class="col-sm-6">
+								<div class="col-sm-7">
 									<div class="product-page">
 										<a class="zoom" href="/static/upload/engines/cummins-isf-3-8.jpg"><img class="img-border" src="/static/upload/engines/cummins-isf-3-8.jpg" width="100%" alt=""></a>
 									</div>
 								</div>
-								<div class="col-sm-6">
+								<div class="col-sm-5">
 									<div class="product-page">
 										<h2>Cummins ISF 3.8 (новый)</h2>
 										<ul class="specs">
@@ -122,64 +125,83 @@
 										<li>
 											<span>Модификации</span>
 											<span>s3141, s3154, s3168, s4141, s4154, s4168, sR168</span>
+										</li>	
+										<li>
+											<span>Мощность</span>
+											<span>141 — 168 л.с. / 105 — 125 кВт</span>
+										</li>	
+										<li>
+											<span>Крутящий момент</span>
+											<span>450 — 600 Нм</span>
+										</li>	
+										<li>
+											<span>Цилиндров</span>
+											<span>4</span>
 										</li>
 										<li>
-											<span>Применяемость</span>
-											<span>ГАЗ 3310 «Валдай»</span>
-										</li>
-											<ul style="padding-left: 0">
-												<li>
-													<span>&nbsp;</span>
-													<span>ГАЗ 3309</span>
-												</li>
-												<li>
-													<span>&nbsp;</span>
-													<span>ПАЗ-320402-05</span>
-												</li>
-												<li>
-													<span>&nbsp;</span>
-													<span>ПАЗ «Вектор»</span>
-												</li>
-												<li>
-													<span>&nbsp;</span>
-													<span>ПАЗ-4234</span>
-												</li>
-												<li>
-													<span>&nbsp;</span>
-													<span>МАЗ «Зубрёнок» 4371</span>
-												</li>
-												<li>
-													<span>&nbsp;</span>
-													<span>Foton BJ 1051</span>
-												</li>
-												<li>
-													<span>&nbsp;</span>
-													<span>Foton Auman BJ 1113</span>
-												</li>
-											</ul>									
+											<span>Топливная система</span>
+											<span>Common Rail</span>
+										</li>							
 										<li>
 											<span>Экологический класс</span>
 											<span>Евро 3 / Евро 4</span>
+										</li>
+										<li>
+											<span>"Сухой" вес</span>
+											<span>280 кг</span>
 										</li>
 									</ul>
 								</div>
 							</div>
 							<div class="col-sm-6" style="text-align: center">
-								<img src="/static/upload/engines/isf-3-8.png" width="80%" alt="">
+								<img src="/static/upload/engines/isf-3-8.png" width="60%" alt="">
 							</div>
 						</div>
 					</div>
 				</section>
 				<!-- End tabs section -->
 
+				<section class="tabs-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-6" style="text-align: center">
+								<img src="/static/upload/engines/cummins-isf-3-8-na-gaz-valday.png" width="80%" alt="">
+							</div>
+							<div class="col-sm-6">
+								<div class="product-page">
+									<div class="about-us-box">
+										<h3>Применяемость</h3>
+									</div>
+									<ul class="specs-dotted">
+										<li>
+											<span>ГАЗ</span>
+											<span>3309, 3310 «Валдай»</span>
+										</li>							
+										<li>
+											<span>ПАЗ</span>
+											<span>320402-05, 4234, «Вектор»</span>
+										</li>
+										<li>
+											<span>МАЗ</span>
+											<span>4371 «Зубрёнок»</span>
+										</li>
+										<li>
+											<span>Foton</span>
+											<span>Auman BJ 1113, BJ 1051</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
 				<!-- tabs-section 
 					================================================== -->
 				<section class="tabs-section">
 					<div class="container">
 						<div class="row">
-							<div class="col-sm-6" style="text-align: center">
-								<img src="/static/upload/engines/upakovka.png" width="70%" alt="">
-							</div>
 							<div class="col-sm-6">
 								<div class="product-page">
 									<div class="about-us-box">
@@ -218,9 +240,43 @@
 									</ul>
 								</div>
 							</div>
+							<div class="col-sm-6" style="text-align: center">
+								<img src="/static/upload/engines/upakovka.png" width="70%" alt="">
+							</div>
 						</div>
 					</div>
 				</section>
+
+				<section class="tabs-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="product-page">
+									<div class="about-us-box">
+										<h3>Другие двигатели этой серии</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="related_products">
+								<div class="col-sm-3">
+									<a href="http://red-diesel.ru/dvigateli-cummins/isf-2-8/"><img class="img-border" src="/static/images/cummins-isf-2-8.jpg" width="100%" alt=""></a>
+									<h5><a href="http://red-diesel.ru/dvigateli-cummins/isf-2-8/">Cummins ISF 2.8</a></h5>
+									<p>ГАЗель 3302 «Бизнес», ГАЗель NEXT и др.</p>
+									<p class="related_price">465 тыс. &#8381;</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="banner-section">
+                    <div class="container">
+                        <p class="slogan">Остались вопросы? Нужна консультация? Пишите!</p>
+                        <a href="#engine-question" class="button-one open-popup-link">Задать вопрос</a>
+                    </div>
+                </section>
 
 				<div id="buy-engine" class="white-popup mfp-hide">
 					<form id="buy-engine-form" method="post">
@@ -312,5 +368,6 @@
 
   					</form>
 				</div>
+			</div>
 {% endblock %}
 

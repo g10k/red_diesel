@@ -5,17 +5,20 @@
 {% block description %}Актуальные цены на запчасти и двигатели Cummins. В наличии и на заказ более 3000 позиций. Скидки для оптовиков. Доставка во все регионы РФ.{% endblock description %}
 
 {% block home_section %}
-    <section class="page-banner-section parts">
+<div>
+    <section class="page-banner-section">
         <div class="container">
             <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-12">
                     <h1>Прайс на запчасти для двигателей Cummins</h1>
                 </div>
-                <div class="col-sm-5">
-                    <ul class="page-depth">
-                        <li><a href="http://red-diesel.ru/">Главная</a></li>
-                        <li><a href="http://red-diesel.ru/zapchasti-cummins/">Запчасти Cummins</a></li>
-                        <li>Прайс-лист</li>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="page-depth" itemscope itemtype="http://schema.org/BreadcrumbList">
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="http://red-diesel.ru/"><span itemprop="name">Главная</span></a><meta itemprop="position" content="1" /></li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="http://red-diesel.ru/zapchasti-cummins/"><span itemprop="name">Запчасти Cummins</span></a><meta itemprop="position" content="2" /></li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name">Прайс-лист</span><meta itemprop="position" content="3" /></li>
                     </ul>
                 </div>
             </div>
@@ -70,6 +73,7 @@
             </div>
         </section>
     <!-- End tabs section -->
+  </div>
 
 {% endblock  %}
 

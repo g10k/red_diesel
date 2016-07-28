@@ -1,10 +1,10 @@
 {% extends 'django_project/base.html' %}
 
-{% block title %}{% if car_category.header %}{{ car_category.header }}{% else %}Запчасти на {{ car_category.title }} с Cummins: купить, цена, прайс-лист.{% endif %}{% endblock title %}
+{% block title %}{% if car_category.header %}{{ car_category.header }}{% else %}Запчасти на {% if car_category.title %}{{ car_category.title }}{% else %}{{ car_category.name }}{% endif %} с Cummins: купить, цена, прайс-лист.{% endif %}{% endblock title %}
 
-{% block description %}{% if car_category.description %}{{ car_category.description }}{% else %}Полный ассортимент запчастей для автомобилей {{ car_category.title }} с двигателями Cummins в наличии. Лучшие цены, оперативная доставка, гарантия.{% endif %}{% endblock description %}
+{% block description %}{% if car_category.description %}{{ car_category.description }}{% else %}Полный ассортимент запчастей для автомобилей {% if car_category.title %}{{ car_category.title }}{% else %}{{ car_category.name }}{% endif %} с двигателями Cummins в наличии. Лучшие цены, оперативная доставка, гарантия.{% endif %}{% endblock description %}
 
-{% block keywords %}{% if car_category.keywords %}{{ car_category.keywords }}{% else %}Запчасти на {{ car_category.title }} Cummins{% endif %}{% endblock %}
+{% block keywords %}{% if car_category.keywords %}{{ car_category.keywords }}{% else %}Запчасти на {% if car_category.title %}{{ car_category.title }}{% else %}{{ car_category.name }}{% endif %} с Cummins{% endif %}{% endblock %}
 
 
 <!-- {{ car_category }}
@@ -38,15 +38,15 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1>Запчасти на {{ car_category.title }}</h1>
+                        <h1>Запчасти на {% if car_category.title %}{{ car_category.title }}{% else %}{{ car_category.name }}{% endif %} с двигателем Cummins</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <ul class="page-depth">
-                            <li><a href="http://red-diesel.ru/">Главная</a></li>
-                            <li><a href="http://red-diesel.ru/zapchasti-cummins/">Запчасти Cummins</a></li>
-                            <li>Запчасти на {{ car_category.title }}</li>
+                        <ul class="page-depth" itemscope itemtype="http://schema.org/BreadcrumbList">
+                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="http://red-diesel.ru/"><span itemprop="name">Главная</span></a><meta itemprop="position" content="1" /></li>
+                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="http://red-diesel.ru/trucks/"><span itemprop="name">Техника с двигателями Cummins</span></a><meta itemprop="position" content="2" /></li>
+                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span itemprop="name">Запчасти на {% if car_category.title %}{{ car_category.title }}{% else %}{{ car_category.name }}{% endif %}</span><meta itemprop="position" content="3" /></li>
                         </ul>
                     </div>
                 </div>

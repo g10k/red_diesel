@@ -66,9 +66,7 @@ class Detail(models.Model):
         return unicode(first_articul)
 
     def get_url_with_domain(self):
-        s = reverse('detail', args=('__',))
-        detail_path = s.replace('__', self.get_absolute_url())
-        return 'www.red-diesel.ru' + detail_path
+        return 'www.red-diesel.ru' + self.get_absolute_url()
 
     def get_absolute_url(self):
         engines = '-'.join(self.engines.values_list('name', flat=True))
@@ -76,6 +74,11 @@ class Detail(models.Model):
         reverse('detail', args=(detail_url,))
         return reverse('detail', args=(detail_url,))
 
+    def get_related_details(self):
+        if self.category:
+            return self.category.details.filter(engines__in=self.engines.all()).exclude(id=self.id).order_by('?')[:4]
+        else:
+            return Detail.objects.none()
 
 
 class DetailCategory(models.Model):
@@ -125,6 +128,11 @@ class EngineCategory(models.Model):
     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
     standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
 
+    def get_absolute_url(self):
+        if self.url:
+            return reverse('engines_detail', args=(self.url,))
+        else:
+            return reverse('engines_detail', args=(self.name,))
 
     def __unicode__(self):
         return self.name
@@ -162,6 +170,12 @@ class CarCategory(models.Model):
 
     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
     standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
+
+    def get_absolute_url(self):
+        if self.url:
+            return reverse('trucks_detail', args=(self.url,))
+        else:
+            return reverse('trucks_detail', args=(self.name,))
 
     class Meta:
         verbose_name = u'Категория машины'
