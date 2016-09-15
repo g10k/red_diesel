@@ -33,7 +33,7 @@ urlpatterns = patterns('',
     # url(r'upload/price/pricelist-cummins-red-diesel.xls')
 
     # url(r'^zapchasti-cummins/$', django_project.views.engines),
-    url(r'^zapchasti-cummins/(.*)/$', django_project.views.detail_page, name='engines_detail'),
+    url(r'^zapchasti-cummins/(.*)/$', django_project.views.engine_detali, name='engines_detail'),
 
     url(r'^dvigateli-cummins/$', TemplateView.as_view(template_name='django_project/dvigateli.html'), name='dvigateli'),
     url(r'^dvigateli-cummins/isf-2-8/$', TemplateView.as_view(template_name='django_project/isf-2-8.html')),

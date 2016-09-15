@@ -73,7 +73,7 @@ class PartsRequestView(BaseFormView):
             mail_admins(
                 u'Заявка на сайте',
                 message='simple plain text message',
-                html_message=u'%s' % form.as_p()
+                html_message=u'%s' % form.as_text()
             )
             return JsonResponse({'success': 'ok'})
         else:
@@ -92,7 +92,7 @@ class BuyEngineView(BaseFormView):
             mail_admins(
                 u'Заявка на двигатель %s' % engine_model,
                 message='simple plain text message',
-                html_message=u'%s' % form.as_p()
+                html_message=u'%s' % form.as_text()
             )
 
             return JsonResponse({'success': 'ok'})
@@ -111,7 +111,7 @@ class QuestionView(BaseFormView):
             mail_admins(
                 u'Вопрос по двигателю %s' % engine_model,
                 message='simple plain text message',
-                html_message=u'%s' % form.as_p()
+                html_message=u'%s' % form.as_text()
             )
             return JsonResponse({'success': 'ok'})
         else:
@@ -242,7 +242,7 @@ engines = EnginesView.as_view()
 
 
 class EngineDetaliView(TemplateView):
-    template_name = 'django_project/engines/engine_detali.html'
+    template_name = 'django_project/engines/engine_detail.html'
     def get_context_data(self, **kwargs):
         engine_detail_url = self.args[0]
         engine = get_engine_by_url(engine_detail_url)
