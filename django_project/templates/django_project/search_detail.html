@@ -1,0 +1,15 @@
+{% extends 'django_project/base.html'%}
+
+{% block home_section %}
+{% endblock %}
+
+{% block services_section %}
+{% endblock %}
+
+{% block tabs_section %}
+    <ol>
+    {% for detail in objects %}
+        <li><a href="{{ detail.get_absolute_url }}">{{ detail }}</a></li>
+    {% endfor %}
+    </ol>
+{% endblock %}

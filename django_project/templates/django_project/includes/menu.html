@@ -1,10 +1,8 @@
-
-
-<li><a href="http://red-diesel.ru" id='id_main_a'>Главная</a></li>
-<li class="drop"><a href="http://red-diesel.ru/zapchasti-cummins/">Запчасти Cummins</a>
+<li><a href="{% if not DEBUG %}http://red-diesel.ru{% endif %}" id='id_main_a'>Главная</a></li>
+<li class="drop"><a href="{% if not DEBUG %}http://red-diesel.ru{% endif %}/zapchasti-cummins/">Запчасти Cummins</a>
     <ul class="dropdown">
-        <li><a href="http://red-diesel.ru/price-cummins/">Прайс Cummins</a></li>
+        <li><a href="{% if not DEBUG %}http://red-diesel.ru{% endif %}/price-cummins/">Прайс Cummins</a></li>
     </ul>
-<li><a href="http://red-diesel.ru/dvigateli-cummins/">Двигатели в сборе</a></li>
-<li><a href="http://red-diesel.ru/about/">О нас</a></li>
-<li><a href="http://red-diesel.ru/contact/">Контакты</a></li>
+<li><a href="{% if not DEBUG %}http://red-diesel.ru{% endif %}/dvigateli-cummins/">Двигатели в сборе</a></li>
+<li><a href="{% if not DEBUG %}http://red-diesel.ru{% endif %}/about/">О нас</a></li>
+<li><a href="{% if not DEBUG %}http://red-diesel.ru{% endif %}/contact/">Контакты</a></li>

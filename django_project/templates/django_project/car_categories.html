@@ -1,0 +1,37 @@
+{% extends 'django_project/price-cummins.html' %}
+
+{% block home_section %}
+    <section class="page-banner-section parts">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h1>Автомобили</h1>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="page-depth">
+                        <li><a href="http://red-diesel.ru/">Главная</a></li>
+                        <li><a href="http://red-diesel.ru/cars/">Автомобили</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block tabs_section %}
+    {% for car_category in  cars %}
+        <p></p>
+        <legend>{{ car_category }}</legend>
+        name:{{ car_category.name }}
+        title:{{ car_category.title }}
+        description: {{ car_category.description }}
+        keywords: {{ car_category.keywords }}
+        header: {{ car_category.header }}
+
+        {% for photo in car_category.photos.all %}
+            {{ photo }}
+        {% endfor %}
+
+    {% endfor %}
+
+{% endblock  %}
