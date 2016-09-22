@@ -240,10 +240,13 @@ class EnginesView(TemplateView):
         return {'engines': rd.models.EngineCategory.objects.all()}
 engines = EnginesView.as_view()
 
-
+import requests
 class EngineDetaliView(TemplateView):
     template_name = 'django_project/engines/engine_detail.html'
     def get_context_data(self, **kwargs):
+        response = requests.get('http://ipinfo.io')
+        response.get('city')
+        response.get('region')
         engine_detail_url = self.args[0]
         engine = get_engine_by_url(engine_detail_url)
         if not engine:

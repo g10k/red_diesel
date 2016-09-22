@@ -379,7 +379,7 @@ def update_urls(request):
     if 'load' in request.POST:
         updated_urls = []
         for detail in rd.models.Detail.objects.all():
-            required_url = detail.get_absolute_url().replace('/price-cummins/', '')
+            required_url = detail.get_required_url()
             if detail.url != required_url:
                 detail.old_url = detail.url
                 detail.url = required_url
@@ -390,7 +390,8 @@ def update_urls(request):
 
     else:
         for detail in rd.models.Detail.objects.all():
-            if detail.url != detail.get_absolute_url():
+            required_url = detail.get_required_url()
+            if detail.url != required_url:
                 urls.append(detail)
     c['urls'] = urls
     return render(request, 'rd/update_urls.html', c)

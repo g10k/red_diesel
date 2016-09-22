@@ -20,6 +20,13 @@ class CallMessage(forms.Form):
         }
     )
 
+    def as_text(self):
+        res = u''
+        for name, field in self.fields.items():
+            bf = self[name]
+            res += u'%s: %s</br>' % (bf.label, bf.value())
+        return res
+
 
 class PartsRequest(forms.Form):
     engine = forms.CharField(required=True)
@@ -40,6 +47,13 @@ class PartsRequest(forms.Form):
     parts = forms.CharField(required=True)
     comment = forms.CharField(required=False)
 
+    def as_text(self):
+        res = u''
+        for name, field in self.fields.items():
+            bf = self[name]
+            res += u'%s: %s</br>' % (bf.label, bf.value())
+        return res
+
 
 class BuyEngine(forms.Form):
     engine_model = forms.CharField(required=False)
@@ -51,11 +65,25 @@ class BuyEngine(forms.Form):
     mail = forms.EmailField()
     comment = forms.CharField(required=False)
 
+    def as_text(self):
+        res = u''
+        for name, field in self.fields.items():
+            bf = self[name]
+            res += u'%s: %s</br>' % (bf.label, bf.value())
+        return res
+
 class Question(forms.Form):
     engine_model = forms.CharField(required=False)
     phone = forms.CharField(required=False)
     mail = forms.EmailField()
     question = forms.CharField()
+
+    def as_text(self):
+        res = u''
+        for name, field in self.fields.items():
+            bf = self[name]
+            res += u'%s: %s</br>' % (bf.label, bf.value())
+        return res
 
 class ContactForm(forms.Form):
     name = forms.CharField(
@@ -77,3 +105,10 @@ class ContactForm(forms.Form):
             'required': u'Вы забыли указать сообщение',
         }
     )
+
+    def as_text(self):
+        res = u''
+        for name, field in self.fields.items():
+            bf = self[name]
+            res += u'%s: %s</br>' % (bf.label, bf.value())
+        return res

@@ -4,3 +4,4 @@ xlwt==0.7.4
 django-tinymce==2.3.0
 django-htmlmin==0.9.1
 awesome-slugify==1.6.5
+transliterate

@@ -68,6 +68,9 @@ class Detail(models.Model):
     def get_url_with_domain(self):
         return 'www.red-diesel.ru' + self.get_absolute_url()
 
+    def get_required_url(self):
+        return self.get_absolute_url().replace('/price-cummins/', '').replace('/','')
+
     def get_absolute_url(self):
         engines = '-'.join(self.engines.values_list('name', flat=True))
         detail_url = slugify_ru('_'.join([self.articul, self.name, engines, self.proizvoditel])).lower()
