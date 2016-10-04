@@ -287,3 +287,10 @@ class City(models.Model):
     ru_name = models.CharField(max_length=255)
 
 
+    class Meta:
+        verbose_name = u'Город'
+        verbose_name_plural = u'Города'
+        ordering = ['en_name', ]
+
+    def __unicode__(self):
+        return u'%s : %s' % (self.en_name, self.ru_name)

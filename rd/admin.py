@@ -1,5 +1,6 @@
 from django.contrib import admin
-from rd.models import Detail, Photo, EngineCategory, CarCategory, EngineCategoryPhoto, CarCategoryPhoto, DetailCategory
+from rd.models import Detail, Photo, EngineCategory, CarCategory, EngineCategoryPhoto, CarCategoryPhoto, DetailCategory, \
+    City
 # Register your models here.
 
 from django import forms
@@ -57,3 +58,4 @@ admin.site.register(Detail, DetailAdmin)
 admin.site.register(EngineCategory, EngineCategoryAdmin)
 admin.site.register(CarCategory, CarCategoryAdmin)
 admin.site.register(DetailCategory)
+admin.site.register(City)
