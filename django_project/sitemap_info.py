@@ -1,9 +1,10 @@
 #encoding: utf-8
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
-from rd.models import Detail, CarCategory
+from rd.models import Detail, CarCategory, EngineCategory
 from django.conf import settings
 import os
+
 
 class DetailSitemap(Sitemap):
     priority = 0.64
@@ -17,17 +18,18 @@ class DetailSitemap(Sitemap):
         return obj.dm
 
 
-class TrucksSitemap(Sitemap):
-    priority = 1
+class EngineSitemap(Sitemap):
+    priority = 0.8
+    changefreq = 'daily'
+    def items(self):
+        return EngineCategory.objects.all()
 
-    def location(self, obj):
-        return reverse('trucks_detail', args=(obj.url))
 
+class CarCategorySitemap(Sitemap):
+    priority = 0.8
+    changefreq = 'daily'
     def items(self):
         return CarCategory.objects.all()
-
-    def lastmod(self, obj):
-        return obj.dm
 
 
 class StaticViewSitemap(Sitemap):

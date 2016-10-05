@@ -9,7 +9,8 @@ admin.autodiscover()
 import django_project.forms
 import django_project.views
 from django.contrib.sitemaps.views import sitemap
-from sitemap_info import DetailSitemap, StaticViewSitemap, PriceExcelSiteMap
+from sitemap_info import DetailSitemap, StaticViewSitemap, PriceExcelSiteMap, EngineSitemap, CarCategorySitemap
+
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='django_project/index.html'), name='index'),
@@ -63,5 +64,5 @@ urlpatterns = patterns('',
     url(r'^contact/$', django_project.views.contract, name='contact'),
     url(r'^rd/', include(rd.urls)),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^sitemap\.xml$', sitemap, {'sitemaps': {'detali': DetailSitemap, 'static': StaticViewSitemap, 'excel': PriceExcelSiteMap}}, name='django.contrib.sitemaps.views.sitemap')
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': {'detali': DetailSitemap, 'engines': EngineSitemap,'cars':CarCategorySitemap, 'static': StaticViewSitemap, 'excel': PriceExcelSiteMap}}, name='django.contrib.sitemaps.views.sitemap')
 )

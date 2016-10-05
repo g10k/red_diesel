@@ -172,7 +172,7 @@
 							<div class="related_products">
 								{% for related_detail in detail.get_related_details %}
 								<div class="col-sm-3">
-									<a href="#"><img class="img-border" src="/static/images/cummins-parts.jpg" width="100%" alt=""></a>
+									<a href="http://{{ related_detail.get_url_with_domain }}"><img class="img-border" src="/static/images/cummins-parts.jpg" width="100%" alt=""></a>
 									<h5><a href="http://{{ related_detail.get_url_with_domain }}">{{ related_detail.name }} {{ related_detail.engine }}</a></h5>
 									<p>{{ related_detail.articul }}</p>
 									<p class="related_price">{{ related_detail.cost }} &#8381;</p>

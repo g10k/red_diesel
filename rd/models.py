@@ -1,4 +1,5 @@
 # encoding: utf-8
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from slugify import Slugify, CYRILLIC
@@ -198,61 +199,7 @@ class CarCategoryPhoto(models.Model):
     class Meta:
         ordering = ['-sort',]
 
-#
-#
-#
-# class Order(models.Model):
-#     # details = models.ManyToManyField(Detail, verbose_name=u'Детали')
-#     name = models.CharField(u'Название', max_length=255)
-#
-#     dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
-#     dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
-#     dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
-#
-#     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
-#     standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
-#
-#
-#     class Meta:
-#         verbose_name = u'Заявка поставщику'
-#         verbose_name_plural = u'Заявки поставщику'
-#         ordering = ['-dc', ]
-#
-#     def __unicode__(self):
-#         return self.name
-#
-# class Vendor(models.Model):
-#     name = models.CharField(u'Название', max_length=255)
-#
-#     class Meta:
-#         verbose_name = u'Поставщик'
-#         verbose_name_plural = u'Поставщики'
-#         ordering = ['name', ]
-#
-#     def __unicode__(self):
-#         return self.name
-#
-# class DetailVendor(models.Model):
-#
-#     detail = models.ForeignKey(Detail, verbose_name=u'Деталь')
-#     vendor = models.ForeignKey(Vendor, verbose_name=u'Поставщик')
-#     cost = models.IntegerField(u'Стоимость')
-#     comment = models.TextField(u'Комментарий поставщика', blank=True)
-#
-#     dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
-#     dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
-#     dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
-#
-#     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
-#     standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
-#
-#     class Meta:
-#         verbose_name = u'Заявка на деталь'
-#         verbose_name_plural = u'Заявки на деталь'
-#         ordering = ['-vendor', ]
-#
-#     def __unicode__(self):
-#         return u'%s: %s' % (self.order, self.detail)
+
 
 
 def get_detail_by_url(url):
@@ -281,6 +228,94 @@ def get_engine_by_url(url):
 
 
 
+# class Client(models.Model):
+#     name = models.CharField(u'Имя', max_length=255)
+#     info = models.TextField(u'Информация о клиенте', blank=True)
+#
+#     class Meta:
+#         verbose_name = u'Клиент'
+#         verbose_name_plural = u'Клиенты'
+#
+#     def __unicode__(self):
+#         return u'%s' % self.name
+#
+#
+# class Order(models.Model):
+#     NEW = u'Новая'
+#     IN_WORK = u'В работе'
+#     SEND = u'Отправлено клиенту'
+#     DONE = u'Получено клиентом'
+#     STATUS_CHOICES = ((NEW, NEW), (IN_WORK, IN_WORK), (SEND, SEND),(DONE,DONE))
+#
+#     name = models.CharField(u'Название', max_length=255)
+#     status = models.CharField(choices=STATUS_CHOICES, max_length=255)
+#
+#     comment = models.TextField(u'Комментарий', blank=True)
+#
+#     user = models.ForeignKey(User, blank=True)
+#
+#     dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
+#     dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
+#     dd = models.DateTimeField(u'Дата удаления', null=True, editable=False, db_index=True)
+#
+#     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
+#     standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
+#
+#     class Meta:
+#         verbose_name = u'Заявка поставщику'
+#         verbose_name_plural = u'Заявки поставщику'
+#         ordering = ['-dc', ]
+#
+#     def __unicode__(self):
+#         return self.name
+#
+#
+# class OrderDetailVendor(models.Model):
+#     order = models.ForeignKey(Order)
+#     detail_vendor = models.ForeignKey(DetailVendor)
+#
+#     class Meta:
+#         verbose_name = u'Поставщик'
+#         verbose_name_plural = u'Поставщики'
+#         ordering = ['name', ]
+#
+#     def __unicode__(self):
+#         return u'%s: %s-%s' % (self.order, self.detail_vendor.detail, self.detail_vendor.vendor)
+#
+#
+# class Vendor(models.Model):
+#     name = models.CharField(u'Название', max_length=255)
+#
+#     class Meta:
+#         verbose_name = u'Поставщик'
+#         verbose_name_plural = u'Поставщики'
+#         ordering = ['name', ]
+#
+#     def __unicode__(self):
+#         return self.name
+#
+#
+# class DetailVendor(models.Model):
+#     detail = models.ForeignKey(Detail, verbose_name=u'Деталь')
+#     vendor = models.ForeignKey(Vendor, verbose_name=u'Поставщик')
+#     cost = models.IntegerField(u'Стоимость')
+#     comment = models.TextField(u'Комментарий поставщика', blank=True)
+#     nalichie = models.TextField(u'Наличие', blank=True)
+#
+#     dc = models.DateTimeField(auto_now_add=True, verbose_name=u'Дата создания')
+#     dm = models.DateTimeField(auto_now=True, verbose_name=u'Последнее изменение', db_index=True)
+#     dd = models.DateTimeField(u'Дата удаления',null=True, editable=False, db_index=True)
+#
+#     objects = ExcludeDeletedManager()  # переопределение стандартного менеджера
+#     standard_objects = models.Manager()  # предусмотрим возможность использования стандартного менеджера
+#
+#     class Meta:
+#         verbose_name = u'Заявка на деталь'
+#         verbose_name_plural = u'Заявки на деталь'
+#         ordering = ['-vendor', ]
+#
+#     def __unicode__(self):
+#         return u'%s: %s' % (self.order, self.detail)
 
 class City(models.Model):
     en_name = models.CharField(max_length=255)

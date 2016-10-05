@@ -2128,10 +2128,14 @@ footer p.copyright {
 /*-------------------------------------------------*/
 @media (max-width: 1280px) {
   #content {
-    max-width: 1000px;
+    max-width: 1080px;
+  }
+  #content .inner-content {
+  margin-left: 250px;
   }
   header {
-    margin-left: -500px;
+    margin-left: -540px;
+    width: 250px;
   }
   .top-line ul.info-list li p {
     font-size: 14px;
@@ -2169,7 +2173,7 @@ footer p.copyright {
     margin-bottom: 0;
   }
 }
-@media (max-width: 1020px) {
+@media (max-width: 1080px) {
   #container {
     padding: 0;
   }
@@ -2332,6 +2336,9 @@ footer p.copyright {
   }
   .blog-section .blog-box ul.pagination-list {
     margin-bottom: 40px;
+  }
+  .top-line ul.info-list {
+    margin-bottom: 10px;
   }
 }
 @media (max-width: 500px) {
@@ -2586,6 +2593,13 @@ a:hover img.img-border {
   background-color: #f7f7f7;
 }
 
+.product-page .bx-wrapper {
+  margin-bottom: 20px;
+}
+
+#bx-pager a.active img {
+  border: solid 1px #e40606;
+}
 
 
 /*-------------------------------------------------------*/
@@ -2617,3 +2631,22 @@ a:hover img.img-border {
   background-color: #f7f7f7;
   border: 1px solid #f7f7f7;
  }
+
+/*-------------------------------------------------------*/
+/* NEW ELEMENTS
+/*-------------------------------------------------------*/
+
+.gray-btn {
+  background:#f7f7f7; 
+  margin-top:20px; 
+  color:#333; 
+  text-decoration: none; 
+  border:2px solid #f7f7f7; 
+  border-radius:0px; 
+  font-weight:500;
+  font-size: 12px;
+  font-family: 'Scada', sans-serif;
+  text-transform: uppercase;
+  padding: 10px 35px;
+  display: inline-block;
+}
